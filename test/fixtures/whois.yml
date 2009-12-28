@@ -1,0 +1,13 @@
+one:
+  version: 1
+  content: MyText
+  for_user_id: 1
+  by_user_id: 1
+  by: MyString
+
+two:
+  version: 1
+  content: MyText
+  for_user_id: 1
+  by_user_id: 1
+  by: MyString

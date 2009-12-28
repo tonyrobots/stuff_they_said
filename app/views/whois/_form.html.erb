@@ -1,0 +1,24 @@
+<% form_for @whois do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :version %><br />
+    <%= f.text_field :version %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.label :for_user_id %><br />
+    <%= f.text_field :for_user_id %>
+  </p>
+  <p>
+    <%= f.label :by_user_id %><br />
+    <%= f.text_field :by_user_id %>
+  </p>
+  <p>
+    <%= f.label :by %><br />
+    <%= f.text_field :by %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

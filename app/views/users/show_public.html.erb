@@ -1,0 +1,26 @@
+<% title @user.name %>
+	
+<div id="user_wrap">
+
+	<!-- Left User Info Column  -->
+	<div id="user_info">
+		<%= image_tag @user.image_large %>
+		<div id="user_tags">
+			smart, funny, silly, stupid, cool
+		</div>
+		<div id="user_pages">
+			badges go here. 
+		</div>
+	</div>
+
+	<!-- Right User Content Column  -->
+	<div id="user_content">
+		<% if  @user.current_whois != 0 %>
+		<div id="user_whois">
+			<%= render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => false, :change => false } %>
+		</div>
+		<% end %>
+	</div>
+</div>
+
+

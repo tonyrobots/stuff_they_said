@@ -1,0 +1,25 @@
+<% title "Whois" %>
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>Content</th>
+    <th>For User</th>
+    <th>By User</th>
+    <th>By</th>
+  </tr>
+  <% for whois in @whois %>
+    <tr>
+      <td><%=h whois.version %></td>
+      <td><%=h whois.content %></td>
+      <td><%=h whois.for_user_id %></td>
+      <td><%=h whois.by_user_id %></td>
+      <td><%=h whois.by %></td>
+      <td><%= link_to "Show", whois %></td>
+      <td><%= link_to "Edit", edit_whois_path(whois) %></td>
+      <td><%= link_to "Destroy", whois, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Whois", new_whois_path %></p>

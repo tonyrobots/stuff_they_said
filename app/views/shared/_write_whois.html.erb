@@ -1,0 +1,19 @@
+<div id="write_whois">
+  <% remote_form_for :whois, :url => { :controller => "whois", :action => "create" } do |f| %>
+	<fieldset id="wwhois" class="rounded-10">
+	<legend>Who is <%= user.name %>?</legend>
+	    <%= f.hidden_field :by_user_id, :value => current_user.id %>
+	    <%= f.hidden_field :for_user_id, :value => user.id %>
+	    <%= f.hidden_field :by, :value => current_user.name %>
+	    <%= f.hidden_field :version, :value => user.current_whois %>
+	    <%= f.text_area :content %>
+		<%= f.submit "Say It" %>
+		<% if user.current_whois != 0 %>
+		<span class="byline" id="write_whois_byline" style="display: none">
+			Last updated <%= time_ago_in_words whois.created_at %> by <%= whois.by %>
+			<%= link_to "Cancel", "#", :onclick => "read_whois();" %>
+		</span>
+		<% end %>
+	</fieldset>
+	<% end %>
+</div>

@@ -1,0 +1,44 @@
+<% title @user.name %>
+	
+<div id="user_wrap">
+
+	<!-- Left User Info Column  -->
+	<div id="user_info">
+		<%= image_tag @user.image_large %>
+		<div id="user_tags">
+			smart, funny, silly, stupid, cool
+		</div>
+		<div id="user_pages">
+			badges go here. 
+		</div>
+	</div>
+
+	<!-- Right User Content Column  -->
+	<div id="user_content">
+		<div id="user_whois">
+			<%= render :partial => "shared/write_whois", :locals => { :user => @user, :whois => @whois } %>
+			<% unless @user.current_whois == 0 %>
+			<%= render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => true, :change => false } %>
+			<% end %>
+			<script>
+				<% if @user.current_whois != 0%>
+				$('#write_whois').hide();
+				<% end %>
+				function write_whois()
+				{
+					$('#write_whois').show();
+					$('#write_whois_byline').show();
+					$('#read_whois').hide();
+				}
+				function read_whois()
+				{
+					$('#write_whois').hide();
+					$('#write_whois_byline').hide();
+					$('#read_whois').show();
+				}
+			</script>
+		</div>
+	</div>
+</div>
+
+

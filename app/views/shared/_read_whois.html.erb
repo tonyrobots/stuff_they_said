@@ -1,0 +1,21 @@
+<div id="read_whois">
+	<fieldset id="rwhois" class="rounded-10">
+		<legend>Who is <%= user %>?</legend>
+		<div id="rwhois_wrap">
+			<p class="content">
+				<%= note.content %>
+			</p>
+			<span class="byline">
+				Last updated <%= time_ago_in_words note.created_at %> by <%= note.by %>
+				<span id="whois_action">
+					<% if edit %>
+					<%= link_to "Edit", "#", :onclick => "write_whois();" %>
+					<% end %>
+					<% if change == true %>
+					<%= link_to_remote "Change",  :url => { :controller => "whois", :action => "show", :id => note.for_user_id }, :method => :get, :update => { :success => "rwhois_wrap", :failure => "error" } %>
+					<% end %>
+				</span>
+			</span>
+		</div>
+	</fieldset>
+</div>

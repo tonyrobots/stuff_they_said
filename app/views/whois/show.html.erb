@@ -1,0 +1,28 @@
+<% title "Whois" %>
+
+<p>
+  <strong>Version:</strong>
+  <%=h @whois.version %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%=h @whois.content %>
+</p>
+<p>
+  <strong>For User:</strong>
+  <%=h @whois.for_user_id %>
+</p>
+<p>
+  <strong>By User:</strong>
+  <%=h @whois.by_user_id %>
+</p>
+<p>
+  <strong>By:</strong>
+  <%=h @whois.by %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_whois_path(@whois) %> |
+  <%= link_to "Destroy", @whois, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", whois_path %>
+</p>

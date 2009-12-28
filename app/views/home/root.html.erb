@@ -1,0 +1,23 @@
+<% title "Hello", false %>
+<div id="content">
+	<h1 class="site"> Stuff They Said</h1>
+	<h2 class="site"> (about you)</h2>
+
+	<div id="welcome_login" onClick="FB.Connect.requireSession(function() { connect_to_facebook(); });">
+		See What Your Friends Are Saying About You!
+	</div>
+	<div id="welcome_blurb">
+		You Will be asked to identify yourself through your Facebook Account
+	</div>
+	<div id="search_box">
+		Search goes here
+	</div>
+	<form id='connect_to_facebook_form' method='post' action='/user_session'>
+	<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
+	</form>
+	<script type='text/javascript' charset='utf-8'>
+	 function connect_to_facebook() {
+	   jQuery('#connect_to_facebook_form').submit();
+	 }
+	</script>
+</div>
