@@ -1,0 +1,25 @@
+<div id="read_statement<%= statement.id %>" class="read_statement">
+	<p id="question<%= statement.id %>" class="question">
+		<%= statement.question %>
+	</p>
+	<p id="content<%= statement.id %>" class="content">
+		<%= statement.content %>
+	</p>
+	<div class="byline_wrap">
+		<span id="byline<%= statement.id %>" class="byline">
+			by <%= link_to statement.by, "/#{statement.by_link}" %>, <%= time_ago_in_words statement.created_at %>
+		</span>
+		<span class="actions">
+			<% if vote %>
+			<%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post %>
+			<span id="statement_vote_<%= statement.id %>"><%= statement.score %></span>
+			<%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %>
+			<% end %>
+			<% if moderate %>
+			<%= link_to "Respond", "/#{statement.by_link}" %>
+			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
+			<% end %>
+		<span>
+	</div>
+	<br class="clear">
+</div>

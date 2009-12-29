@@ -12,7 +12,7 @@
 					<%= link_to "Edit", "#", :onclick => "write_whois();" %>
 					<% end %>
 					<% if change == true %>
-					<%= link_to_remote "Change",  :url => { :controller => "whois", :action => "show", :id => note.for_user_id }, :method => :get, :update => { :success => "rwhois_wrap", :failure => "error" } %>
+					<%= link_to_remote "Change",  :url => { :controller => "whois", :action => "show", :id => note.user_id }, :method => :get, :update => { :success => "rwhois_wrap", :failure => "error" } %>
 					<% end %>
 				</span>
 			</span>

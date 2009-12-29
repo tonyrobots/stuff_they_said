@@ -1,8 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :whois
 
-
-
+  map.resources :statements, :member => { :vote => :post }
+  map.resources :whois, :member => { :change_whois => :post }
   map.resource :user_session, :users
   map.home "/home", :controller => "home", :action => "home"
   map.welcome "/welcome", :controller => "home", :action => "welcome"

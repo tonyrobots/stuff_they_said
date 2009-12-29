@@ -2,8 +2,8 @@
   <% remote_form_for :whois, :url => { :controller => "whois", :action => "create" } do |f| %>
 	<fieldset id="wwhois" class="rounded-10">
 	<legend>Who is <%= user.name %>?</legend>
-	    <%= f.hidden_field :by_user_id, :value => current_user.id %>
-	    <%= f.hidden_field :for_user_id, :value => user.id %>
+	    <%= f.hidden_field :friend_id, :value => current_user.id %>
+	    <%= f.hidden_field :user_id, :value => user.id %>
 	    <%= f.hidden_field :by, :value => current_user.name %>
 	    <%= f.hidden_field :version, :value => user.current_whois %>
 	    <%= f.text_area :content %>

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :store_location
+  # before_filter :store_location
 
   def show
-    @user = User.find_by_permalink params[:title]
+    @user = User.find_by_permalink params[:title], :include => :statements
     @whois = Whois.find @user.current_whois unless @user.current_whois == 0
 
     if current_user

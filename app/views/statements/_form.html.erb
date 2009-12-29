@@ -1,0 +1,24 @@
+<% form_for @statement do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :question %><br />
+    <%= f.text_field :question %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :friend_id %><br />
+    <%= f.text_field :friend_id %>
+  </p>
+  <p>
+    <%= f.label :score %><br />
+    <%= f.text_field :score %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

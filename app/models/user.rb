@@ -1,20 +1,21 @@
 class User < ActiveRecord::Base
   acts_as_authentic 
+  acts_as_voter
   attr_accessible :name, :login_count, :permalink, :current_whois
-  has_many :whoiss, :foreign_key => :for_user_id
+  has_many :whoiss, :foreign_key => :user_id
+  has_many :statements, :order => "created_at DESC"
+  
   
   def before_connect(facebook_session)
     self.name = facebook_session.user.name
     self.image_thumb = facebook_session.user.pic_square
     self.image_small = facebook_session.user.pic
     self.image_large = facebook_session.user.pic_big
-    city = ""
-    city = "-#{facebook_session.user.current_location.city}" unless facebook_session.user.current_location.nil?
-    self.permalink = page_permalink(city)
+    self.permalink = page_permalink
   end
 
-  def page_permalink(city)
-    page_token = "#{self.name.gsub(' ', '-')}#{city.gsub(' ', '-')}"
+  def page_permalink
+    page_token = "#{self.name.gsub(' ', '-')}"
     page = User.find_by_permalink page_token
     if page.nil? 
       return page_token

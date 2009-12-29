@@ -38,6 +38,10 @@
 				}
 			</script>
 		</div>
+		<div id="user_statements">
+			<%= render :partial => "shared/write_statement", :locals => { :user_id => @user.id } %>
+			<%= render :partial => "shared/read_statement", :collection => @user.statements, :as => :statement, :locals => { :moderate => false, :vote => true } %>
+		</div>
 	</div>
 </div>
 

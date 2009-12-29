@@ -1,6 +1,6 @@
 class Whois < ActiveRecord::Base
-  attr_accessible :version, :content, :for_user_id, :by_user_id, :by
-  belongs_to :user, :foreign_key => :for_user_id
+  attr_accessible :version, :content, :user_id, :friend_id, :by
+  belongs_to :user
   before_create :set_version
   after_create :set_current_version
   

@@ -11,9 +11,9 @@ class HomeController < ApplicationController
   end
 
   def home
-    if current_user.login_count == 0
+    if current_user.login_count == 1
       current_user.increment! :login_count
-      render :action => :welcome
+      render :action => 'welcome'
     else
       render :layout => 'main'
     end

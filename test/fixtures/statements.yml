@@ -1,0 +1,13 @@
+one:
+  question: MyString
+  content: MyText
+  user_id: 1
+  friend_id: 1
+  score: 1
+
+two:
+  question: MyString
+  content: MyText
+  user_id: 1
+  friend_id: 1
+  score: 1

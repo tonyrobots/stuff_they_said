@@ -20,6 +20,9 @@
 			<%= render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => false, :change => false } %>
 		</div>
 		<% end %>
+		<div id="user_statements">
+			<%= render :partial => "shared/read_statement", :collection => @user.statements, :as => :statement, :locals => { :moderate => false, :vote => false } %>
+		</div>
 	</div>
 </div>
 

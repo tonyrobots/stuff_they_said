@@ -1,0 +1,25 @@
+<% title "Statements" %>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Content</th>
+    <th>User</th>
+    <th>Friend</th>
+    <th>Score</th>
+  </tr>
+  <% for statement in @statements %>
+    <tr>
+      <td><%=h statement.question %></td>
+      <td><%=h statement.content %></td>
+      <td><%=h statement.user_id %></td>
+      <td><%=h statement.friend_id %></td>
+      <td><%=h statement.score %></td>
+      <td><%= link_to "Show", statement %></td>
+      <td><%= link_to "Edit", edit_statement_path(statement) %></td>
+      <td><%= link_to "Destroy", statement, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Statement", new_statement_path %></p>

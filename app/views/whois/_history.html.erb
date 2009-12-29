@@ -5,7 +5,7 @@
 	<span class="byline">
 		Last updated <%= time_ago_in_words whois.created_at %> by <%= whois.by %>
 		<span class="whois_action">
-			<%= link_to_remote "Change",  :url => { :controller => "whois", :action => "change_whois", :id => note.for_user_id }, :method => :get, :update => { :success => "rwhois_wrap", :failure => "error" } %>
+			<%= link_to_remote "Use This",  :url => { :controller => "whois", :action => "change_whois", :id => whois.id }, :method => :post, :update => { :success => "user_whois", :failure => "error" } %>
 		</span>
 	</span>
 	<br class="clear">

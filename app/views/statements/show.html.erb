@@ -1,0 +1,28 @@
+<% title "Statement" %>
+
+<p>
+  <strong>Question:</strong>
+  <%=h @statement.question %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%=h @statement.content %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%=h @statement.user_id %>
+</p>
+<p>
+  <strong>Friend:</strong>
+  <%=h @statement.friend_id %>
+</p>
+<p>
+  <strong>Score:</strong>
+  <%=h @statement.score %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_statement_path(@statement) %> |
+  <%= link_to "Destroy", @statement, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", statements_path %>
+</p>
