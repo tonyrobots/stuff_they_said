@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :login_count, :permalink, :current_whois
   has_many :whoiss, :foreign_key => :user_id
   has_many :statements, :order => "created_at DESC"
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   
   
   def before_connect(facebook_session)
@@ -30,4 +34,8 @@ class User < ActiveRecord::Base
     session[:return_to] = '/welcome'
   end
   
+  def self.search(search, page)
+    paginate :per_page => 5, :page => page,
+             :conditions => ['name like ?', "%#{search}%"], :order => 'name'
+  end  
 end

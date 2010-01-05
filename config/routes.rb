@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :friendships
 
+  
+  map.resources :search, :only => :index 
   map.resources :statements, :member => { :vote => :post }
   map.resources :whois, :member => { :change_whois => :post }
   map.resource :user_session, :users

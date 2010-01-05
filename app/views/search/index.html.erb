@@ -1,0 +1,23 @@
+<% title "Search" %>
+	
+<div id="search_wrap">
+
+	<% form_tag request.path, :method => 'get' do %>
+	  <% content_tag :label do %>
+	    Search term:
+	    <%= text_field_tag :search, params[:search] %>
+	  <% end %>
+	<% end %>
+
+	<div id="search_results">
+		<% for user in @results %>
+		<div id="search_item_<%= user.id %>">
+			<%= link_to(image_tag(user.image_small), user_page_path(user.permalink)) %>
+			<div class="item_info" >
+				<%= link_to user.name, user_page_path(user.permalink) %>
+			<div>
+		</div>	
+		<% end %>
+	</div>
+</div>
+

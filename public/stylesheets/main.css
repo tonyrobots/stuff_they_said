@@ -27,6 +27,8 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		#header #logo { float: left; height: 20px;}
 		ul#user_nav {margin: 0; padding: 0; float: right; font-size: 13px;}
 		#user_nav li { display: inline;} 
+		#user_nav form { display: inline;}
+		#user_nav input { border: 1px solid #ccc; padding: 2px; }
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
 		#user_info img { }

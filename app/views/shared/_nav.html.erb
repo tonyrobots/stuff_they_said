@@ -9,7 +9,11 @@
 <% else %>
 <li><%= link_to "Sign In", "#", :onclick => "FB.Connect.requireSession(function() { connect_to_facebook(); });" %></li>
 <% end %>
-| <li>Search</li>
+| <li>
+<% form_tag "/search", :method => 'get' do %>
+    <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
+<% end %>
+</li>
 <ul>
 <form id='connect_to_facebook_form' method='post' action='/user_session'>
 <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
