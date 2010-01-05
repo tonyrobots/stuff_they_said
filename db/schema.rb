@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(:version => 20091229013259) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.integer  "score"
     t.string   "by"
     t.string   "by_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",      :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20091229013259) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type",                    :null => false
+    t.string   "voteable_type", :default => "",    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

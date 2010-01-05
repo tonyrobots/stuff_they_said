@@ -4,14 +4,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_permalink params[:title], :include => :statements
     @whois = Whois.find @user.current_whois unless @user.current_whois == 0
+    
 
-    if current_user
-      if current_user.permalink == params[:title]
-        render  "show_me"
-      else
-        @whois = Whois.new if @user.current_whois == 0
-        render "show_friend"
-      end
+    if current_user && current_user.permalink == params[:title]
+      render  "show_me"
+    elsif current_user && User.are_friends?(current_user, @user)
+      @whois = Whois.new if @user.current_whois == 0
+      render "show_friend"
     else
       render "show_public"
     end

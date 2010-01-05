@@ -15,7 +15,7 @@ class StatementsController < ApplicationController
     @statement = Statement.new(params[:statement])
     if @statement.save
       render :update do |page|
-        page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false }
+        page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
         page['statement_content'].value = ""
       end
     end

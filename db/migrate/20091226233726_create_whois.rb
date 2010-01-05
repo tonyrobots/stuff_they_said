@@ -3,9 +3,10 @@ class CreateWhois < ActiveRecord::Migration
     create_table :whois do |t|
       t.integer :version
       t.text :content
-      t.integer :for_user_id
-      t.integer :by_user_id
+      t.integer :user_id
+      t.integer :friend_id
       t.string :by
+      t.string :by_link
       t.timestamps
     end
     

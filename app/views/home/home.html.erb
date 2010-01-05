@@ -1,3 +1,31 @@
 <% title "Home", false %>
 	
-This is home
+
+<div id="describe_friend">
+	<div class="blurb">
+		Describe <strong><%= fb_name @random_user, :linked => false %></strong> in a single sentence. Humor is good.    <br class="clear">
+		Describe a different friend 
+	</div>
+	<div class="user_img left">		
+		<%= fb_profile_pic @random_user, :size => :normal %>
+	</div>
+	<div class="input_box">
+		<p>Examples:  <br>
+		“Mike is a dad, entrepreneur,  closet  belly dancer,  and a Raider fan.” 
+		“Jack is a lover of golf, scotch,  and women... 
+		</p>
+	  <% form_for :whois, :url => { :controller => "whois", :action => "create" } do |f| %>
+		    <%= f.hidden_field :friend_id, :value => current_user.id %>
+		    <%= f.hidden_field :user_id, :value => "" %>
+		    <%= f.hidden_field :fb_user, :value => @random_user %>
+		    <%= f.hidden_field :by, :value => current_user.name %>
+		    <%= f.hidden_field :by_link, :value => current_user.permalink %>
+		    <%= f.text_area :content %><br>
+			<span class="right">
+				<%= f.submit "Submit" %> <%= link_to "Skip this page", home_path %>
+			</span>
+		<% end %>
+	</div>
+</div>
+
+

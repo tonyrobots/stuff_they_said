@@ -14,11 +14,17 @@ class WhoisController < ApplicationController
   end
   
   def create
+    params[:whois][:user_id] = Whois.new_user(current_user.id, params[:whois][:fb_user]) if params[:whois][:user_id].blank? 
     @whois = Whois.new(params[:whois])
-    @user = User.find params[:whois][:user_id], :select => "id, name, current_whois"
     if @whois.save
-      render :update do |page|
-        page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }
+    @user = User.find params[:whois][:user_id], :select => "id, name, current_whois"
+      respond_to do |format|
+        format.html { redirect_back_or_default home_url }
+        format.js do
+          render :update do |page|
+            page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }
+          end
+        end
       end
     end
   end
