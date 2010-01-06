@@ -1,15 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :friendships
 
-  
-  map.resources :search, :only => :index 
+  map.resources :friendships
+  # map.resources :search, :only => :index 
   map.resources :statements, :member => { :vote => :post }
-  map.resources :whois, :member => { :change_whois => :post }
+  map.resources :whois, :member => { :change_whois => :post, :describe_friend => :get }
   map.resource :user_session, :users
   map.home "/home", :controller => "home", :action => "home"
   map.welcome "/welcome", :controller => "home", :action => "welcome"
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+  map.search_everyone "/search/everyone/:search", :controller => "search", :action => "everyone"
+  map.search "/search/:search", :controller => "search", :action => "index"
+  map.check_user "/users/check/:fbuid", :controller => "users", :action => "check_user"
   map.user_page "/:title", :controller => "users", :action => "show"
   map.root :controller => "home", :action => "root" # optional, this just sets the root route
     

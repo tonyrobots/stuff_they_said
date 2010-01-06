@@ -1,21 +1,43 @@
-<% title "Search" %>
+<% title "Search", false %>
 	
 <div id="search_wrap">
-	
-	<%= @all_count %> People
+	<ul id="search_nav">
+		<% if current_user %>
+		<li id="friends" class="selected">Friends</li>
+		<li id="everyone">
+			<%= link_to "Everyone", search_everyone_path(params[:search]) %>  (<%= @everyone %>)</li>
+		<% else %>
+		<li id="everyone"  class="selected">Everyone (<%= @results.total_entries %>)</li>
+		<% end %>
+	</ul>
 
-	<% form_tag request.path, :method => 'get' do %>
-	  <% content_tag :label do %>
-	    Search term:
-	    <%= text_field_tag :search, params[:search] %>
-	  <% end %>
-	<% end %>
-
+<h2> People with <strong>"<%= params[:search]%>"</strong> in their name: </h2>
+ 
 	<div id="search_results">
-		<% for user in @friends %>
-		<div id="search_item_<%= user.id %>">
-			<%= user.name %>
+		<% for user in @results %>
+		<div id="search_item_<%= user.id %>" class="search_item">
+			<a href="/<%= user.permalink %>">
+				<%= image_tag user.image_thumb %>
+				<div class="search_item_info">
+					<%= user.name %>
+				</div>
+			</a>
+			<br class="clear">
 		</div>	
+		<% end %>
+		
+		<% if current_user %>
+		<% for user in @fb_friends %>
+		<div id="search_item_<%= user.uid %>" class="search_item">
+			<a href="/users/check/<%= user.uid %>">
+			<%= image_tag(user.pic_square) unless user.pic_square.nil? %>
+			<div class="search_item_info">
+				<%= user.name %>
+			</div>
+			</a>
+			<br class="clear">
+		</div>	
+		<% end %>
 		<% end %>
 	</div>
 </div>

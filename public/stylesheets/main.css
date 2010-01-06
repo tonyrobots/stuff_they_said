@@ -20,7 +20,8 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 	h2.site { font-size: 20px; font-weight: normal; margin: 0; border: 0;}
 	#welcome_login { margin: 40px auto; padding: 15px 20px; font-size: 18px; line-height: 1.8em; font-weight: bold; width: 250px; background: #CFC;  border: 1px solid green; -webkit-border-radius: 20px; -moz-border-radius: 20px;}
 	#welcome_login:hover { cursor: pointer;}
-	#search_box { margin: 20px auto; padding: 20px;  width: 400px; border: 1px solid #ccc;}
+	#search_box { margin: 20px auto; padding: 20px;  width: 400px;}
+	#search_box #search_form input { padding: 7px; background-color: #CFC; border: 1px solid #6C6; font-size: 16px;}
 	#notice { margin: 10px; padding: 10px; background: #6C6;}
 	
 	#header { min-height: 20px; border-bottom: 1px solid #ccc; padding: 5px;}
@@ -57,7 +58,15 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
 		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
 
-
+		#notifications { margin: 10px 5px; padding: 10px; background-color: #6C6; font-size: 16px;}
+		
+		ul#search_nav { margin: 20px 0;  padding: 8px 0; border-bottom: 4px solid #6C6;}
+		ul#search_nav li { display: inline; padding: 10px;}
+		ul#search_nav li.selected { background: #6C6;}
+		
+		.search_item { margin: 10px 0; padding: 5px;}
+		.search_item img { margin: 0 10px; float: left;}
+		.search_item_info { float: left;}
 
 /*Rails Errors
 ----------------------------*/

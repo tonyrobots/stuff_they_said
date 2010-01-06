@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all
   layout 'main'
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  helper_method :current_user_session, :current_user, :set_facebook_session, :facebook_session
+  helper_method :facebook_session, :current_user_session, :current_user, :set_facebook_session
   
   
   private

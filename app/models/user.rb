@@ -11,11 +11,7 @@ class User < ActiveRecord::Base
 
   def self.friends(user, friend)
     friendship = User.find(user).friendships.build(:friend_id => friend)
-    if friendship.save
-      return true
-    else 
-      return false
-    end
+    friendship.save
   end
   
   
@@ -28,7 +24,7 @@ class User < ActiveRecord::Base
     self.image_thumb = facebook_session.user.pic_square
     self.image_small = facebook_session.user.pic
     self.image_large = facebook_session.user.pic_big
-    self.permalink = User.page_permalink(self.name)
+    self.permalink = User.page_permalink(facebook_session.user.name)
   end
 
 
@@ -52,4 +48,6 @@ class User < ActiveRecord::Base
     paginate :per_page => 5, :page => page,
              :conditions => ['name like ?', "%#{search}%"], :order => 'name'
   end  
+  
+
 end

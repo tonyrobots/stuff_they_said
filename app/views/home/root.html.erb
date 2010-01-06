@@ -7,10 +7,13 @@
 		See What Your Friends Are Saying About You!
 	</div>
 	<div id="welcome_blurb">
-		You Will be asked to identify yourself through your Facebook Account
+		You will be asked to identify yourself through your Facebook Account
 	</div>
 	<div id="search_box">
-		Search goes here
+		<form id='search_form' action="javascript:search_form();">
+		    <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
+			<%= submit_tag  "Search" %>
+		</form>
 	</div>
 	<form id='connect_to_facebook_form' method='post' action='/user_session'>
 	<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
@@ -19,5 +22,9 @@
 	 function connect_to_facebook() {
 	   jQuery('#connect_to_facebook_form').submit();
 	 }
+	function search_form(){
+		if($('#search').val() == "") alert("Please enter a search term");
+		else window.location.href = '/search/'+$('#search').val();
+	}
 	</script>
 </div>

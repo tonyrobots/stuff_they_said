@@ -16,4 +16,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def check_user
+    user = User.find_by_facebook_uid params[:fbuid]
+    if user.nil?
+      Whois.new_user(current_user.id, params[:fbuid])
+      user = User.find_by_facebook_uid params[:fbuid]
+    else
+      User.friends(current_user.id, user.id) unless User.are_friends?(current_user, user)
+    end
+    redirect_to "/#{user.permalink}"
+  end
 end

@@ -10,16 +10,22 @@
 <li><%= link_to "Sign In", "#", :onclick => "FB.Connect.requireSession(function() { connect_to_facebook(); });" %></li>
 <% end %>
 | <li>
-<% form_tag "/search", :method => 'get' do %>
+	<form id='search_form' action="javascript:search_form();">
     <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
-<% end %>
+</form>
+
 </li>
 <ul>
 <form id='connect_to_facebook_form' method='post' action='/user_session'>
-<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
+	<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
 </form>
 <script type='text/javascript' charset='utf-8'>
- function connect_to_facebook() {
-   jQuery('#connect_to_facebook_form').submit();
- }
+ 	function connect_to_facebook() {
+   		jQuery('#connect_to_facebook_form').submit();
+ 	}
+	function search_form(){
+		if($('#search').val() == "") alert("Please enter a search term");
+		else window.location.href = '/search/'+$('#search').val();
+	}
+	
 </script>

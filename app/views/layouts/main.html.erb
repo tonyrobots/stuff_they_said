@@ -8,8 +8,11 @@
 		<%= fb_connect_javascript_tag %>
 	</head>
 	<body>
+		<% if current_user %>
+		<%= init_fb_connect "XFBML", :js => :jquery, :app_settings => "{ ifUserNotConnected: user_not_connected }" %>
+		<% else %>
 		<%= init_fb_connect "XFBML", :js => :jquery %>
-
+		<% end %>
 		<div id="container">
       		<%- flash.each do |name, msg| -%>
         	<%= content_tag :div, msg, :id => "flash_#{name}" %>
@@ -29,5 +32,12 @@
 				<br class="clear">
 	  		</div>
     	</div>
+ 		<%- if current_user %>
+		<script type='text/javascript' charset='utf-8'>
+			function user_not_connected(){
+				FB.Connect.requireSession();
+			}
+		</script>
+		<% end %>
   	</body>
 </html>

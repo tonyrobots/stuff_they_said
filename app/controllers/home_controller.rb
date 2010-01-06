@@ -15,10 +15,6 @@ class HomeController < ApplicationController
       current_user.increment! :login_count
       render :action => 'welcome'
     else
-      
-      @random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]
-      
-      
       render :layout => 'main'
     end
   end

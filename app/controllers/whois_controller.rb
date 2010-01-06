@@ -1,7 +1,8 @@
 class WhoisController < ApplicationController
+  before_filter :require_user
+
   def index
     @whois = Whois.all
-    
   end
   
   def show
@@ -54,5 +55,12 @@ class WhoisController < ApplicationController
     current_user.update_attribute(:current_whois, params[:id])
     whois = Whois.find params[:id]
     render :partial => "shared/read_whois", :locals => { :user => current_user.name, :note => whois, :edit => false, :change => true }
+  end
+  
+  def describe_friend
+    random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]
+    render :update do |page|
+      page.replace_html "describe_friend_wrap", :partial => 'shared/describe_friend', :locals => { :fbuid => random_user }
+    end
   end
 end
