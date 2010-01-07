@@ -3,7 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friendships, :badges
   # map.resources :search, :only => :index
   map.resources :statements, :member => { :vote => :post }
-  map.resources :whois, :member => { :change_whois => :post, :describe_friend => :get }
+  map.resources :whois, :member => { :change_whois => :post, :describe_friend => :get, :get_close_friend => :get  }
+  map.resources :users, :only => [:update_settings, :show, :check_user], :member => { :update_settings => :post}
   map.resource :user_session, :users
   map.home "/home", :controller => "home", :action => "home"
   map.welcome "/welcome", :controller => "home", :action => "welcome"

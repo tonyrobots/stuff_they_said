@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   # before_filter :store_location
 
   def show
-    @user = User.find_by_permalink params[:title], :include => :statements
+    @user = User.find_by_permalink params[:title], :include => [:statements, :tags, :badgeings]
     @whois = Whois.find @user.current_whois unless @user.current_whois == 0
     if current_user && current_user.permalink == params[:title]
-      @badges = User.badges_left @user
+      @badges = Badge.badges_left @user
       render  "show_me"
     elsif current_user && User.are_friends?(current_user, @user, facebook_session)
       @whois = Whois.new if @user.current_whois == 0
@@ -25,4 +25,11 @@ class UsersController < ApplicationController
     end
     redirect_to "/#{user.permalink}"
   end
+  
+  def update_settings
+    current_user.settings[:read_stream] = 1 if params[:read_stream] = 1
+    current_user.save(false)
+    render :nothing => true
+  end
+  
 end

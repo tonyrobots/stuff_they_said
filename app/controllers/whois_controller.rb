@@ -63,4 +63,13 @@ class WhoisController < ApplicationController
       page.replace_html "describe_friend_wrap", :partial => 'shared/describe_friend', :locals => { :fbuid => random_user }
     end
   end
+  
+  def get_close_friend 
+    wall_users = facebook_session.fql_query("SELECT actor_id FROM stream WHERE source_id =#{current_user.facebook_uid} AND actor_id !=#{current_user.facebook_uid} limit 20")
+    random_user = wall_users[rand(wall_users.length)]
+    render :update do |page|
+      page.replace_html "describe_friend_wrap", :partial => 'shared/describe_friend', :locals => { :fbuid => random_user["actor_id"] }
+    end
+  end
+  
 end

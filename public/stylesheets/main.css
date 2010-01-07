@@ -43,8 +43,8 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		#user_whois fieldset { padding: 10px; border: 1px solid gray; background: #eee;}
 		#user_whois textarea { width: 600px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
 
-		#user_whois .content { font-size: 20px;}
-		#user_whois .byline { font-style: italic; float: right;}
+		#user_whois .content { font-size: 20px; line-height: 2em;}
+		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
 		#write_statement { width: 680px; margin: 10px 0; padding: 10px; background-color: #CFC; border: 1px solid #6C6;}
@@ -54,7 +54,7 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.read_statement { padding: 10px; width: 680px; margin: 10px; border-bottom: 1px dotted #222;}
 		.read_statement p.question { font-size: 13px; line-height: 1.4em; padding: 5px 0;}
 		.read_statement p.content { font-size: 18px; line-height: 2em;  }
-		.read_statement .byline_wrap {float: right;}
+		.read_statement .byline_wrap {float: right; }
 		.byline_wrap span.byline { font-style: italic; color: #333;}
 
 
@@ -74,8 +74,10 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.search_item_info { float: left;}
 		
 		#cards_wrap { width: 400px;}
-		.card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
-		.card:hover { border: 1px solid #6C6; background-color: #CFC;}
+		#cards_wrap .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
+		#cards_wrap .card:hover { border: 1px solid #6C6; background-color: #CFC;}
+		#profile_cards_wrap .card { float: left; width: 75px;  min-height: 75px; margin: 2px; padding: 3px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #ddd;}
+		
 		
 /*Rails Errors
 ----------------------------*/

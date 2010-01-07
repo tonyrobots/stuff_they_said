@@ -1,11 +1,10 @@
 <h3> You have <%= cards.count %> to give </h3> 
 
 <div id="cards_wrap">	
-	</div>
 	<% for card in cards %>
 	<div id="card_<%= card.id %>" class="card">
 		<%= link_to_remote card.name,  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, 
-		:method => :get, :update => { :success => "rwhois_wrap", :failure => "error" } %>
+		:method => :post %>
 	</div>
 	<% end %>
 </div>

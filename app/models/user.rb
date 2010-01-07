@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   acts_as_voter
   acts_as_tagger
   acts_as_taggable_on :tags  
-  attr_accessible :name, :login_count, :permalink, :current_whois, :image_thumb, :facebook_uid, :image_large, :image_small
+  attr_accessible :name, :login_count, :permalink, :current_whois, :image_thumb, :facebook_uid, :image_large, :image_small, :settings
   has_many :whoiss, :foreign_key => :user_id
   has_many :statements, :order => "created_at DESC"
   has_many :friendships
@@ -13,18 +13,12 @@ class User < ActiveRecord::Base
   has_many :badgeings
   has_many :badges, :through => :badgeings
   serialize :badges_given
+  serialize :settings
     
 
   def self.friends(user, friend)
     friendship = User.find(user).friendships.build(:friend_id => friend)
     friendship.save
-  end
-  
-  def self.badges_left (user)
-    cards = Badge.count :conditions => "giveable=1"
-    if user.badges_given.nil?
-      return cards
-    end
   end
   
   def self.are_friends?(cu, user, fb_session)
@@ -41,6 +35,11 @@ class User < ActiveRecord::Base
   end
   
   def before_connect(facebook_session)
+    self.settings = {
+      :read_stream => 0, 
+      :publish_stream => 0,
+      :last_publish => nil
+    }
     self.name = facebook_session.user.name
     self.image_thumb = facebook_session.user.pic_square
     self.image_small = facebook_session.user.pic

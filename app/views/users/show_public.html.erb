@@ -5,11 +5,19 @@
 	<!-- Left User Info Column  -->
 	<div id="user_info">
 		<%= image_tag @user.image_large %>
-		<div id="user_tags">
-			smart, funny, silly, stupid, cool
+		<div id="user_tags_wrap">
+			<ul id="user_tags">
+				<% for tag in @user.tags %>
+				<li><%= link_to tag.name, tag_path(tag.name) %></li>
+				<% end %>
+			</ul>
+			<br class="clear">
 		</div>
-		<div id="user_pages">
-			badges go here. 
+		<div id="user_badges">
+			<div id="profile_cards_wrap">	
+				<%= render :partial => "badges/card", :collection => @user.badgeings, :as => :card %>
+				<br class="clear">
+			</div>
 		</div>
 	</div>
 

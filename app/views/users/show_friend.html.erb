@@ -29,6 +29,10 @@
 			
 		</div>
 		<div id="user_badges">
+			<div id="profile_cards_wrap">	
+				<%= render :partial => "badges/card", :collection => @user.badgeings, :as => :card %>
+				<br class="clear">
+			</div>
 			<%= link_to_remote "Give a Card", :url => { :controller => "badges", :action => "show", :id => @user.id }, :method => :get, :complete => "load_box()",  :html => {:class => "give_card"} %>
 		</div>
 	</div>
