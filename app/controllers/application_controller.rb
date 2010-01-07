@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   layout 'main'
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   helper_method :facebook_session, :current_user_session, :current_user, :set_facebook_session
-  
-  
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
@@ -23,7 +22,7 @@ class ApplicationController < ActionController::Base
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
-        redirect_to login_url
+        redirect_to root_url
         return false
       end
     end

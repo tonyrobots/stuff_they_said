@@ -9,7 +9,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091229013259) do
+ActiveRecord::Schema.define(:version => 20100107004230) do
+
+  create_table "badgeings", :force => true do |t|
+    t.integer "badge_id"
+    t.integer "user_id"
+    t.integer "friend_id"
+    t.text    "data"
+  end
+
+  add_index "badgeings", ["badge_id"], :name => "index_badgeings_on_badge_id"
+  add_index "badgeings", ["user_id"], :name => "index_badgeings_on_user_id"
+
+  create_table "badges", :force => true do |t|
+    t.string  "name"
+    t.string  "image_thumb"
+    t.boolean "giveable",    :default => true
+    t.integer "times_given", :default => 0
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -31,11 +48,28 @@ ActiveRecord::Schema.define(:version => 20091229013259) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.integer  "score"
     t.string   "by"
     t.string   "by_link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score",      :default => 0
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "taggable_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
   create_table "users", :force => true do |t|
@@ -60,12 +94,13 @@ ActiveRecord::Schema.define(:version => 20091229013259) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "current_whois",                     :default => 0
+    t.text     "badges_given"
   end
 
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type", :default => "",    :null => false
+    t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

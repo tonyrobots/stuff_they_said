@@ -6,7 +6,7 @@ class WhoisController < ApplicationController
   end
   
   def show
-    @whois = Whois.find_all_by_friend_id(params[:id])
+    @whois = Whois.find_all_by_user_id(params[:id])
     render :partial => "history", :collection => @whois, :as => :whois
   end
   
@@ -15,12 +15,12 @@ class WhoisController < ApplicationController
   end
   
   def create
-    params[:whois][:user_id] = Whois.new_user(current_user.id, params[:whois][:fb_user]) if params[:whois][:user_id].blank? 
+    params[:whois][:user_id] = Whois.new_user(current_user.id, params[:whois][:fb_user], facebook_session) if params[:whois][:user_id].blank? 
     @whois = Whois.new(params[:whois])
     if @whois.save
-    @user = User.find params[:whois][:user_id], :select => "id, name, current_whois"
+    @user = User.find params[:whois][:user_id], :select => "id, name, current_whois, permalink"
       respond_to do |format|
-        format.html { redirect_back_or_default home_url }
+        format.html { redirect_to user_page_url(@user.permalink) }
         format.js do
           render :update do |page|
             page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }

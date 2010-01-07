@@ -1,0 +1,24 @@
+<% title "Tag", false %>
+	
+<div id="search_wrap">
+	<ul id="search_nav">
+		<li id="everyone" class="selected">Everyone (<%= @results.total_entries %>)</li>
+	</ul>
+
+<h2> People tagged with <strong><%= params[:tag]%></strong> </h2>
+ 
+	<div id="search_results">
+		<% for user in @results %>
+		<div id="search_item_<%= user.id %>" class="search_item">
+			<a href="/<%= user.permalink %>">
+			<%= image_tag user.image_thumb %>
+			<div class="search_item_info">
+				<%= user.name %>
+			</div>
+			</a>
+			<br class="clear">
+		</div>	
+		<% end %>
+	</div>
+</div>
+

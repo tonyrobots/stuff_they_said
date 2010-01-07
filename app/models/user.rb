@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic 
   acts_as_voter
+  acts_as_tagger
+  acts_as_taggable_on :tags  
   attr_accessible :name, :login_count, :permalink, :current_whois, :image_thumb, :facebook_uid, :image_large, :image_small
   has_many :whoiss, :foreign_key => :user_id
   has_many :statements, :order => "created_at DESC"
@@ -8,15 +10,34 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :badgeings
+  has_many :badges, :through => :badgeings
+  serialize :badges_given
+    
 
   def self.friends(user, friend)
     friendship = User.find(user).friendships.build(:friend_id => friend)
     friendship.save
   end
   
+  def self.badges_left (user)
+    cards = Badge.count :conditions => "giveable=1"
+    if user.badges_given.nil?
+      return cards
+    end
+  end
   
-  def self.are_friends?(cu, user)
-    cu.friendships.first :conditions => {:friend_id => user.id}
+  def self.are_friends?(cu, user, fb_session)
+    is_friend = cu.friendships.first :conditions => {:friend_id => user.id}
+    unless is_friend
+      if fb_session.user.friends_with?(user.facebook_uid)
+        User.friends(cu.id, user.id)
+      else
+        false
+      end
+    else
+      true
+    end
   end
   
   def before_connect(facebook_session)

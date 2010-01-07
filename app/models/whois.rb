@@ -4,9 +4,9 @@ class Whois < ActiveRecord::Base
   # before_create :set_version
   after_create :set_current_version
   
-  def self.new_user(cuser, fbuser)
+  def self.new_user(cuser, fbuser, fb_session)
     logger.info "Creating New User #{fbuser}"
-    new_fb_user = Facebooker::Session.create.fql_query("SELECT name,pic, pic_square, pic_big FROM user WHERE uid=#{fbuser}").first
+    new_fb_user = fb_session.fql_query("SELECT name,pic, pic_square, pic_big FROM user WHERE uid=#{fbuser}").first
     permalink = User.page_permalink(new_fb_user.name)
     user = User.new :name => new_fb_user.name, :image_thumb => new_fb_user.pic_square, :image_small => new_fb_user.pic, :image_large => new_fb_user.pic_big, :facebook_uid => fbuser, :permalink => permalink
     user.save_with_validation(false)

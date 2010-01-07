@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :friendships
-  # map.resources :search, :only => :index 
+  map.resources :friendships, :badges
+  # map.resources :search, :only => :index
   map.resources :statements, :member => { :vote => :post }
   map.resources :whois, :member => { :change_whois => :post, :describe_friend => :get }
   map.resource :user_session, :users
@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.welcome "/welcome", :controller => "home", :action => "welcome"
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+  map.tag "/tag/:tag", :controller => "tags", :action => "index"
   map.search_everyone "/search/everyone/:search", :controller => "search", :action => "everyone"
   map.search "/search/:search", :controller => "search", :action => "index"
   map.check_user "/users/check/:fbuid", :controller => "users", :action => "check_user"

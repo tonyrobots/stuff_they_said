@@ -5,11 +5,31 @@
 	<!-- Left User Info Column  -->
 	<div id="user_info">
 		<%= image_tag @user.image_large %>
-		<div id="user_tags">
-			smart, funny, silly, stupid, cool
+		<div id="user_tags_wrap">
+			<ul id="user_tags">
+				<% for tag in @user.tags %>
+				<li><%= link_to tag.name, tag_path(tag.name) %></li>
+				<% end %>
+			</ul>
+			<%= link_to "+Tag", "#", :id => "tag_link", :class => "right" %>
+			<br class="clear">
+			
+			<% form_remote_tag :url => { :controller => "tags", :action => "create" }, :html => {:id => "tag_form", :style => "display:none"} do |f| %>
+			    <%= hidden_field_tag :user_id, @user.id %>
+				<ul class="user_tagger">
+					<% for tag in APP_TAGS %>
+					<li>
+						<%= link_to_remote tag, :url => { :controller => "tags", :action => "create", :tag => tag, :user_id => @user.id }, :method => :post %>
+					</li>
+					<% end %>
+				</ul>
+			    <%= text_field_tag :tag, nil, :class => "tag_input" %>
+				<%= submit_tag "Tag" %>
+			<% end %>
+			
 		</div>
-		<div id="user_pages">
-			badges go here. 
+		<div id="user_badges">
+			<%= link_to_remote "Give a Card", :url => { :controller => "badges", :action => "show", :id => @user.id }, :method => :get, :complete => "load_box()",  :html => {:class => "give_card"} %>
 		</div>
 	</div>
 
@@ -36,6 +56,17 @@
 					$('#write_whois_byline').hide();
 					$('#read_whois').show();
 				}
+				
+				$("#tag_link").click(function () {
+				      $("#tag_form").toggle();
+				});
+				// $(".give_card").colorbox({width:"400px", inline:true, href:"#card_frame"});
+				function load_box(){
+					$('#card_frame').show();
+					$.fn.colorbox({width:'450px', inline:true, href:'#card_frame', open:true,
+					onCleanup:function(){ $('#card_frame').hide(); }					
+					});
+				}
 			</script>
 		</div>
 		<div id="user_statements">
@@ -45,4 +76,6 @@
 	</div>
 </div>
 
-
+<div id="card_frame" style="display:none">
+	
+</div>

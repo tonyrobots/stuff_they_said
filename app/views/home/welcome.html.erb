@@ -1,13 +1,12 @@
 <% title "Welcome", false %>
 <div id="content">
 	
-	<h3 onclick="fb_connect_see_status(); return false;"> Facebook Status <span id="fbcstatus">unknown</span></h3>
-	<h1>Welcome, <%= fb_name(current_user.facebook_uid, :first_name_only => true, :linked => false, :use_you => false) %></h1>
+	<!-- <h3 onclick="fb_connect_see_status(); return false;"> Facebook Status <span id="fbcstatus">unknown</span></h3> -->
+	<h1>Welcome, <%= current_user.name %></h1>
 
 	<div id="notice">
 		Finish registering to check it out. 
 	</div>
-	
 	
 	<script type="text/javascript">
 	//<![CDATA[
@@ -17,5 +16,9 @@
 	  }
 	//]]>
 	</script>
-	
 </div>
+
+<div id="describe_friend_wrap">
+	<%= render :partial => "shared/describe_friend", :locals => { :fbuid => @random_user } %>
+</div>
+<br class="clear">
