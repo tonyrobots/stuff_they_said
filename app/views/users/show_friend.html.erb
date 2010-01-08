@@ -4,7 +4,7 @@
 
 	<!-- Left User Info Column  -->
 	<div id="user_info">
-		<%= image_tag @user.image_large %>
+		<%= image_tag @user.image_large unless @user.image_thumb.nil? %>
 		<div id="user_tags_wrap">
 			<ul id="user_tags">
 				<% for tag in @user.tags %>

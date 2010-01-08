@@ -7,7 +7,7 @@
 	</p>
 	<div class="byline_wrap">
 		<span id="byline<%= statement.id %>" class="byline">
-			by <%= link_to statement.by, "/#{statement.by_link}" %>, <%= time_ago_in_words statement.created_at %>
+			by <%= link_to statement.by, "/#{statement.by_link}" %>, <%= time_ago_in_words statement.created_at %> ago
 		</span>
 		<span class="actions">
 			<% if vote %>

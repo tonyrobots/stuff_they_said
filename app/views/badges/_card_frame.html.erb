@@ -7,4 +7,18 @@
 		:method => :post %>
 	</div>
 	<% end %>
+	<br class="clear">
 </div>
+
+<h3> You have already given <%= pluralize cards_given.count, "card" %> </h3> 
+
+<% if cards_given %>
+<div id="cards_wrap_given">	
+	<% for card in cards_given %>
+	<div id="card_<%= card.id %>" class="card">
+		<%= link_to_remote card.name,  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, 
+		:method => :post %>
+	</div>
+	<% end %>
+</div>
+<% end %>

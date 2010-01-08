@@ -4,9 +4,10 @@
 	    <%= f.hidden_field :friend_id, :value => current_user.id %>
 	    <%= f.hidden_field :by, :value => current_user.name %>
 	    <%= f.hidden_field :by_link, :value => current_user.permalink %>
-	    <%= f.label :question %><br>
-	    <%= f.text_field :question, :class => "question", :value => random_question(user_name) %>
-	    <%= f.text_area :content, :class => "content" %>
+	    <%= f.text_area :content, :class => "content", :value => random_question(user_name) %><br class="clear">
+		<span class="right">
+		<%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%>
 		<%= f.submit "Say It" %>
+		</span>
 	<% end %>
 </div>

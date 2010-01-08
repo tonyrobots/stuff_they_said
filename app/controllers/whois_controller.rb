@@ -18,13 +18,8 @@ class WhoisController < ApplicationController
     params[:whois][:user_id] = Whois.new_user(current_user.id, params[:whois][:fb_user], facebook_session) if params[:whois][:user_id].blank? 
     @whois = Whois.new(params[:whois])
     if @whois.save
-    @user = User.find params[:whois][:user_id], :select => "id, name, current_whois, permalink, facebook_uid"
-    
-    message = "#{current_user.name} described #{@user.name}: #{@whois.content}"
-    if current_user.settings[:publish_stream] == 1
-      User.publishto_fb(facebook_session, current_user.facebook_uid, @user.facebook_uid, 'AboutMe', "http://google.com", message)
-    end
-    
+      @user = User.find params[:whois][:user_id], :select => "id, name, current_whois, permalink, facebook_uid"
+      message = "#{current_user.name} described #{@user.name}: #{@whois.content}"
       respond_to do |format|
         format.html { redirect_to user_page_url(@user.permalink) }
         format.js do
@@ -34,6 +29,8 @@ class WhoisController < ApplicationController
               page << "first_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
             elsif current_user.settings[:publish_stream] == -1
               page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);";
+            else
+              page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);";
             end
           end
         end

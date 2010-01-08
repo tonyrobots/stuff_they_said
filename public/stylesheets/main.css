@@ -77,6 +77,9 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		#cards_wrap .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
 		#cards_wrap .card:hover { border: 1px solid #6C6; background-color: #CFC;}
 		#profile_cards_wrap .card { float: left; width: 75px;  min-height: 75px; margin: 2px; padding: 3px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #ddd;}
+		#cards_wrap_given .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
+		#cards_wrap_given .card:hover { border: 1px solid #6C6; background-color: #CFC;}
+
 		
 		
 /*Rails Errors
