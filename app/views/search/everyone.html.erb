@@ -14,7 +14,7 @@
 		<% for user in @results %>
 		<div id="search_item_<%= user.id %>" class="search_item">
 			<a href="/<%= user.permalink %>">
-			<%= image_tag user.image_thumb %>
+			<%= image_tag(user.image_thumb) unless user.image_thumb.nil?  %>
 			<div class="search_item_info">
 				<%= user.name %>
 			</div>
