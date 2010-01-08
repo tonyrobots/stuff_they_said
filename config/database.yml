@@ -45,4 +45,4 @@ production:
   pool: 5
   username: root
   password: talking2u
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
