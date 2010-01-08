@@ -44,5 +44,5 @@ production:
   database: aboutme_production
   pool: 5
   username: root
-  password: 
+  password: talking2u
   socket: /tmp/mysql.sock
