@@ -27,7 +27,9 @@ class UsersController < ApplicationController
   end
   
   def update_settings
-    current_user.settings[:read_stream] = 1 if params[:read_stream] = 1
+    
+    current_user.settings[:read_stream] = params[:read_stream].to_i  if params[:read_stream]
+    current_user.settings[:publish_stream] = params[:publish_stream].to_i  if params[:publish_stream]
     current_user.save(false)
     render :nothing => true
   end

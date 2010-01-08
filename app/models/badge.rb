@@ -1,7 +1,6 @@
 class Badge < ActiveRecord::Base
 
-  def self.new_badge(badge_id, friend_id, user)
-    friend = User.find friend_id, :select => "image_thumb, permalink, name, id"
+  def self.new_badge(badge_id, friend, user)
     badge = Badge.find badge_id
     data = {
       :user_name => friend.name,
@@ -13,11 +12,11 @@ class Badge < ActiveRecord::Base
       :badge_name =>  badge.name,
       :badge_thumb => badge.image_thumb
     }
-    new_badgeing = Badgeing.create :user_id => friend_id, :badge_id => badge_id, :friend_id => user.id, :data => data
+    new_badgeing = Badgeing.create :user_id => friend.id, :badge_id => badge_id, :friend_id => user.id, :data => data
     user.badges_given = [] if user.badges_given.nil?
     user.badges_given << badge.id
     user.save(false)
-    new_badgeing
+  new_badgeing
   end
 
 

@@ -1,0 +1,12 @@
+<% form_remote_tag :url => { :controller => "tags", :action => "create" }, :html => {:id => "tag_form", :style => "display:none"} do |f| %>
+    <%= hidden_field_tag :user_id, user_id %>
+	<ul class="user_tagger">
+		<% for tag in APP_TAGS %>
+		<li>
+			<%= link_to_remote tag, :url => { :controller => "tags", :action => "create", :tag => tag, :user_id => user_id }, :method => :post %>
+		</li>
+		<% end %>
+	</ul>
+    <%= text_field_tag :tag, nil, :class => "tag_input" %>
+	<%= submit_tag "Tag" %>
+<% end %>

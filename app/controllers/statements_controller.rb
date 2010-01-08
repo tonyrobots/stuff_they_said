@@ -13,6 +13,14 @@ class StatementsController < ApplicationController
   
   def create
     @statement = Statement.new(params[:statement])
+    user = User.find params[:statement][:user_id], :select => "facebook_uid, name"
+
+    message = "#{current_user.name} wrote a statment about #{user.name}: #{@statement.content}"
+
+    if current_user.settings[:publish_stream] == 1
+      User.publishto_fb(facebook_session, current_user.facebook_uid, user.facebook_uid, 'AboutMe', "http://google.com", message)
+    end
+    
     if @statement.save
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }

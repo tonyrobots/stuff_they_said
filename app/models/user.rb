@@ -69,5 +69,22 @@ class User < ActiveRecord::Base
              :conditions => ['name like ?', "%#{search}%"], :order => 'name'
   end  
   
+  def self.publishto_fb(fb_session, from, to, action_name, action_link, message)
+
+    attachment = {
+      :name =>  message,
+		  :href => action_link
+	  }
+    links = [ :text => action_name, :href => action_link ]
+    fb_to = Facebooker::User.new :id => to
+    
+    fb_session.user.publish_to(
+      fb_to,  
+      :message => '', 
+      :action_links => links,
+      :attachment => attachment
+      
+    )     
+  end
 
 end

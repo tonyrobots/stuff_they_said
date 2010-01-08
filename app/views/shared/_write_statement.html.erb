@@ -5,7 +5,7 @@
 	    <%= f.hidden_field :by, :value => current_user.name %>
 	    <%= f.hidden_field :by_link, :value => current_user.permalink %>
 	    <%= f.label :question %><br>
-	    <%= f.text_field :question, :class => "question" %>
+	    <%= f.text_field :question, :class => "question", :value => random_question(user_name) %>
 	    <%= f.text_area :content, :class => "content" %>
 		<%= f.submit "Say It" %>
 	<% end %>

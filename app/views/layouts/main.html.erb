@@ -39,6 +39,43 @@
 			function user_not_connected(){
 				FB.Connect.requireSession();
 			}
+			var read_stream_status = <%= current_user.settings[:read_stream] %>;
+			var publish_stream_status = <%= current_user.settings[:publish_stream] %>;
+			var last_publish = "<%= current_user.settings[:last_publish] %>";
+			
+			function first_publish(from, to, action_msg, action_link, message){
+
+				FB.Connect.showPermissionDialog("publish_stream", function(perms) {
+					var status; 
+					var auto_pub; 
+
+					if (perms) {
+						status = 1; 
+						auto_pub = true;
+					} else {
+						status = -1;
+						auto_pub = false;
+					}
+					
+					$.ajax({
+				   		type: "POST",
+				   		url: "/users/update_settings",
+				   		data: "publish_stream=" + status
+				 	}, false);
+					
+					fb_publish(from, to, action_msg, action_link, message, auto_pub)
+				 });
+			}
+			
+			function fb_publish(from, to, action_msg, action_link, message, auto_pub){
+				var attach = {
+					'name': message,
+					'href': 'http://www.google.com'
+				};
+				links = [{'text':action_msg ,'href': action_link }];
+				FB.Connect.streamPublish('', attach, links, to, '', null, auto_pub);
+			}
+
 		</script>
 		<% end %>
   	</body>
