@@ -13,13 +13,7 @@ class TagsController < ApplicationController
 
     render :update do |page|
       page.insert_html :bottom, 'user_tags', "<li><a href=\"/tag/#{params[:tag]}\">#{params[:tag]}</a></li>"
-      if current_user.settings[:publish_stream] == 0
-        page << "first_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
-      elsif current_user.settings[:publish_stream] == -1
-        page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);";
-      else
-        page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);";
-      end
+      publish_to_fb(page, user, message)
     end
   end
 end

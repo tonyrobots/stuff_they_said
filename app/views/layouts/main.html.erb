@@ -63,6 +63,7 @@
 				   		data: "publish_stream=" + status
 				 	}, false);
 					
+					
 					fb_publish(from, to, action_msg, action_link, message, auto_pub)
 				 });
 			}
@@ -73,9 +74,8 @@
 					'href': 'http://www.google.com'
 				};
 				links = [{'text':action_msg ,'href': action_link }];
-				FB.Connect.streamPublish('', attach, links, to, '', null, auto_pub);
+				setTimeout(function() { FB.Connect.streamPublish('', attach, links, to, '', null, auto_pub); }, 200);
 			}
-
 		</script>
 		<% end %>
   	</body>

@@ -8,13 +8,7 @@ class BadgesController < ApplicationController
     render :update do |page|
       page.hide "card_#{params[:id]}"
       page.insert_html :top, 'profile_cards_wrap', :partial => 'badges/card', :locals => { :card => badge }
-      if current_user.settings[:publish_stream] == 0
-        page << "first_publish(#{current_user.facebook_uid}, #{friend.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
-      elsif current_user.settings[:publish_stream] == -1
-        page << "fb_publish(#{current_user.facebook_uid}, #{friend.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);";
-      else
-        page << "fb_publish(#{current_user.facebook_uid}, #{friend.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);";
-      end
+      publish_to_fb(page, friend, message)
     end  
   end
 
