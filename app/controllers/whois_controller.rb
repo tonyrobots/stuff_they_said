@@ -26,11 +26,11 @@ class WhoisController < ApplicationController
           render :update do |page|
             page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }
             if current_user.settings[:publish_stream] == 0
-              page << "first_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
+              page << "first_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\");"
             elsif current_user.settings[:publish_stream] == -1
-              page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);";
+              page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", false);";
             else
-              page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);";
+              page << "fb_publish(#{current_user.facebook_uid}, #{@user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", true);";
             end
           end
         end

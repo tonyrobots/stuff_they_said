@@ -18,17 +18,28 @@ class StatementsController < ApplicationController
     if @statement.save
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
-        page['statement_content'].value = ""
-        if current_user.settings[:publish_stream] == 0
-          page << "first_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
-        elsif current_user.settings[:publish_stream] == -1
-          page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);";
+        if current_user.settings[:publish_stream] == 1
+          page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", true);"
+        elsif current_user.settings[:publish_stream] == 0
+          page << "first_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\");"
         else
-          page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);";
+          page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", false);"
         end
       end
     end
   end
+  
+
+  
+    # 
+    # if current_user.settings[:publish_stream] == 0
+    #   page << "first_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
+    # elsif current_user.settings[:publish_stream] == -1
+    #   page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);"
+    # else
+    #   page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);"
+    # end
+  
   
   def edit
     @statement = Statement.find(params[:id])
