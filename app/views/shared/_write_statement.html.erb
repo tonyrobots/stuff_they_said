@@ -8,6 +8,7 @@
 		<span class="right">
 		<%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%>
 		<%= f.submit "Say It" %>
+		<br class="clear">
 		</span>
 	<% end %>
 </div>

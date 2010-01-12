@@ -7,7 +7,10 @@
 	 	<%= stylesheet_link_tag 'colorbox' %>
   		<%= javascript_include_tag :defaults %>
 		<%= javascript_include_tag "jquery.colorbox-min.js" %>	
+		<script type='text/javascript' src='/javascripts/jquery.tipsy.js'></script>
+		<link rel="stylesheet" href="/stylesheets/tipsy.css" type="text/css" />
 		<%= fb_connect_javascript_tag %>
+		
 	</head>
 	<body>
 		<% if current_user %>

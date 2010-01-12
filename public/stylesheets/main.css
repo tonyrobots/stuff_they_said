@@ -55,9 +55,19 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.read_statement p.question { font-size: 13px; line-height: 1.4em; padding: 5px 0;}
 		.read_statement p.content { font-size: 18px; line-height: 2em;  }
 		.read_statement .byline_wrap {float: right; }
-		.byline_wrap span.byline { font-style: italic; color: #333;}
-
-
+		.byline_wrap .byline { font-style: italic; color: #333;}
+		.byline_wrap .actions { margin: 0 5px; position: relative;}
+		.actions .score { padding: 0 5px; margin: 0 5px; border: 1px solid gray;}
+			.actions .pos { background: #CFC; }
+			.actions .neg { background: #FE9099; }
+		.score .vote_tip {display: none;  border: 1px solid gray; padding: 5px; width: 150px; position: absolute; top: -50px; left: -30px; z-index: 100; background: white;}
+			.score:hover .vote_tip { display: block;}
+			.vote_tip div { padding: 2px; float: left; font-size: 10px;}
+			.vote_tip .likers { background: #CFC; }
+			.vote_tip .dislikers { background: #FE9099; }
+		.actions .voted { padding: 0 5px; background: #3399CC;}
+		.actions a { margin: 0 2px;}
+		
 		#describe_friend { margin: 10px; }
 		#describe_friend .user_img { margin: 0 10px;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}

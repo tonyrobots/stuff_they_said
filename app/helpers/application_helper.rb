@@ -15,5 +15,15 @@ module ApplicationHelper
       page << "fb_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", true);";
     end
   end
+  
+  def score_class(score)
+    if score > 0 
+      "pos"
+    elsif score < 0
+      "neg"
+    else 
+      "zero"
+    end
+  end
 
 end

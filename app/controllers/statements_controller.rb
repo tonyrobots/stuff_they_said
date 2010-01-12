@@ -14,26 +14,15 @@ class StatementsController < ApplicationController
   def create
     @statement = Statement.new(params[:statement])
     user = User.find params[:statement][:user_id], :select => "facebook_uid, name"
-    message = "#{current_user.name} wrote a statment about #{user.name}: #{@statement.content}"    
+    message = @statement.content
     if @statement.save
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
+        page["statement_content"].value = ""
         publish_to_fb(page, user, message)
       end
     end
-  end
-  
-
-  
-    # 
-    # if current_user.settings[:publish_stream] == 0
-    #   page << "first_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}');"
-    # elsif current_user.settings[:publish_stream] == -1
-    #   page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', false);"
-    # else
-    #   page << "fb_publish(#{current_user.facebook_uid}, #{user.facebook_uid}, 'about me', 'http://google.com', '#{message}', true);"
-    # end
-  
+  end  
   
   def edit
     @statement = Statement.find(params[:id])
@@ -67,9 +56,11 @@ class StatementsController < ApplicationController
     begin
       statement = Statement.find params[:id]
       if params[:type] == "like"
-        current_user.vote_for(statement)  
+        Statement.add_voter(true, current_user, statement)
+        current_user.vote_for(statement)
       else
         current_user.vote_against(statement)  
+        Statement.add_voter(false, current_user, statement)
       end
       pos_score = statement.votes_for
       neg_score = statement.votes_against

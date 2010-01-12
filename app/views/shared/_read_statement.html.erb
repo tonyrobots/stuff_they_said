@@ -6,20 +6,44 @@
 		<%= statement.content %>
 	</p>
 	<div class="byline_wrap">
-		<span id="byline<%= statement.id %>" class="byline">
+		<div id="byline<%= statement.id %>" class="byline left">
 			by <%= link_to statement.by, "/#{statement.by_link}" %>, <%= time_ago_in_words statement.created_at %> ago
-		</span>
-		<span class="actions">
-			<% if vote %>
-			<%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post %>
-			<span id="statement_vote_<%= statement.id %>"><%= statement.score %></span>
-			<%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %>
+		</div>
+		<div class="actions left">
+		<% if vote %>
+		<% user = {:permalink=>current_user.permalink, :name=>current_user.name, :id=> current_user.id} %>
+		
+			<% if(statement.vote_data[:likers].include?(user)) %>
+			<span class="voted left">Like</span>
+			<% else %>
+			<%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post, :html => {:class => "left"}%>
 			<% end %>
+			<div id="statement_vote_<%= statement.id %>" class="left score <%= score_class(statement.score) %>">
+			<%= statement.score %>
+				<div id="statement_vote_<%= statement.id %>_score" class="vote_tip rounded-10" display>
+					<div class="likers">
+						<% for liker in statement.vote_data[:likers] %>
+							<%= liker[:name] %><br class="clear">
+						<% end %>
+					</div>
+					<div class="dislikers">
+						<% for liker in statement.vote_data[:dislikers] %>
+							<%= liker[:name] %><br class="clear">
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<% if statement.vote_data[:dislikers].include?(user) %>
+			<span class="voted left">Dilike</span>
+			<% else %>
+			<%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post, :html => {:class => "left"} %>
+			<% end %>
+		<% end %>
 			<% if moderate %>
 			<%= link_to "Respond", "/#{statement.by_link}" %>
 			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
 			<% end %>
-		<span>
+		</div>
 	</div>
 	<br class="clear">
 </div>

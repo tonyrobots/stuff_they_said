@@ -1,12 +1,9 @@
-X- Move all the FB queries to Client. 
-- Try the comments table for closest friend (random user)
-	Randomize / comments / wall / all user
-- Show_me (request love from friends)
-- Like/dislike hover (show people)
+X - Move all the FB queries to Client. 
+X - statements time (ago)
+X - statement destroy ajax call
+X - change question (dynamically)
+X- Like/dislike hover (show people)
 - Highlight like/dislike for show_me / show_friend
-- statements time (ago)
-X- statement destroy ajax call
-X- change question (dynamically)
 - Tag (cloud) Random subset of the tags table (20) (*New Set link (ajax))
 - Un-give cards/ make it available for re-giving 
 - Tag page (like and dislike for tags) (look at wireframe)
@@ -18,7 +15,12 @@ X- change question (dynamically)
 - Remove the questions column in the statements table. 
 - Person says friend is (tag)
 
+Out of scope Items
+- Show_me (request love from friends)
+- Try the comments table for closest friend (random user)
+	Randomize / comments / wall / all user
 - *Settings page 
 	- Private (default)
 	- Public 
 	- Invisible (no one can see it)
+	
