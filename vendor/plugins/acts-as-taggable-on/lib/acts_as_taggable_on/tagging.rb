@@ -1,7 +1,7 @@
 class Tagging < ActiveRecord::Base #:nodoc:
   attr_accessible :tag, :tag_id, :context,
                   :taggable, :taggable_type, :taggable_id,
-                  :tagger, :tagger_type, :tagger_id
+                  :tagger, :tagger_type, :tagger_id, :voter_name, :voter_link, :tag_vote
 
   belongs_to :tag
   belongs_to :taggable, :polymorphic => true

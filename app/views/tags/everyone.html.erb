@@ -2,11 +2,13 @@
 	
 <div id="search_wrap">
 	<ul id="search_nav">
-		<li id="everyone" class="selected">Friends (<%= @results.total_entries %>)</li>
-		<li id="everyone"><%= link_to "Everyone", everyone_tag_path(params[:tag]) %></li>
+		<% if current_user %>
+		<li id="friend"><%= link_to "Friends", tag_path(params[:tag])%></li>
+		<% end %>
+		<li id="everyone" class="selected">Everyone</li>
 	</ul>
 
-<h2> Your <strong><%= params[:tag].upcase %></strong> friends:</h2>
+<h2> Everyone tagged with <strong><%= params[:tag].upcase %></strong></h2>
  
 	<div id="search_results">
 		<% x = 1 %>
@@ -22,18 +24,12 @@
 				<%= first_tag(user.taggings, @tag.id) %>
 				<%= agree_tags(user.taggings, @tag.id) %>
 				<%= disagree_tags(user.taggings, @tag.id)%>
-				<span>
-					<%= link_to "Agree", vote_tag_path(:tag => params[:tag], :user => user.id, :state => 1)%>
-					<span class="tag_score"><%= tag_score(user.taggings, @tag.id) %></span>
-					<%= link_to "Disagree", vote_tag_path(:tag => params[:tag], :user => user.id, :state => 0)%>
-				</span>
 			</div>
 			<br class="clear">
 		</div>	
 		<% x+=1 %>
 		<% end %>
 		<%= will_paginate @results %>
-		
 	</div>
 </div>
 

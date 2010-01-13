@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
   serialize :badges_given
   serialize :settings
     
-  def self.set_tag(tag, user, tag_user)
+  def self.set_tag(tag, user, tag_user, state)
     new_tag = Tag.find_or_create_with_like_by_name(tag)
     Tagging.create( :tag_id => new_tag.id, :context => "tags", 
-                    :taggable => tag_user, :tagger => user, :voter_name => user.name, :voter_link => user.permalink)
+                    :taggable => tag_user, :tagger => user, :voter_name => user.name, :voter_link => user.permalink, :tag_vote => state)
   end
 
 

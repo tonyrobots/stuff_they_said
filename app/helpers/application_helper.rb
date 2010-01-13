@@ -26,22 +26,40 @@ module ApplicationHelper
     end
   end
   
-  def agree_tags (user_tags, tag_id)
-    good_tags = " "
+  def first_tag(user_tags, tag_id)
+    good_tag = ""
+    taggs = []
     for tag in user_tags
-      good_tags << "#{tag.tagger_id.to_s} " if (tag.tag_id == tag_id && tag.tag_vote)
+      taggs << tag if (tag.tag_id == tag_id)
+    end
+    "First tagged by #{link_to taggs.first.voter_name, '/'+taggs.first.voter_link}<br>"
+  end
+  
+  def agree_tags(user_tags, tag_id)
+    good_tags = ""
+    for tag in user_tags
+      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && tag.tag_vote)
     end
     good_tags
+    "<div class=\"tag_vote\"><ul><li>Agreed by </li>#{good_tags}</ul></div>" if good_tags != ""
   end
 
-  def disagree_tags (user_tags, tag_id)
-    good_tags = " "
+  def disagree_tags(user_tags, tag_id)
+    good_tags = ""
     for tag in user_tags
-      good_tags << "#{tag.tagger_id.to_s} " if (tag.tag_id == tag_id && !tag.tag_vote)
+      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && !tag.tag_vote)
     end
-    good_tags
+    "<div class=\"tag_vote\"><ul><li>Disgreed by </li>#{good_tags}</ul></div>" if good_tags != ""
   end
 
+  def tag_score(user_tags, tag_id)
+    score = 0
+    for tag in user_tags
+      score +=1 if (tag.tag_id == tag_id && tag.tag_vote)
+      score -=1 if (tag.tag_id == tag_id && !tag.tag_vote)
+    end
+    score
+  end
 
 
 end

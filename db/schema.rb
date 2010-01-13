@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113001023) do
+ActiveRecord::Schema.define(:version => 20100113020530) do
 
   create_table "badgeings", :force => true do |t|
     t.integer "badge_id"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20100113001023) do
     t.string   "context"
     t.datetime "created_at"
     t.boolean  "tag_vote",      :default => true
+    t.string   "voter_name"
+    t.string   "voter_link"
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"

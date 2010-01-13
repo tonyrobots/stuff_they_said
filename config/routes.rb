@@ -10,7 +10,10 @@ ActionController::Routing::Routes.draw do |map|
   map.welcome "/welcome", :controller => "home", :action => "welcome"
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+  map.everyone_tag "/tag/everyone/:tag", :controller => "tags", :action => "everyone"
   map.tag "/tag/:tag", :controller => "tags", :action => "index"
+  map.vote_tag "/tag/vote_tag/:user/:tag/:state", :controller => "tags", :action => "vote_tag"
+
   map.search_everyone "/search/everyone/:search", :controller => "search", :action => "everyone"
   map.search "/search/:search", :controller => "search", :action => "index"
   map.check_user "/users/check/:fbuid", :controller => "users", :action => "check_user"
