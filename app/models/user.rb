@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   serialize :badges_given
   serialize :settings
     
+  def self.set_tag(tag, user, tag_user)
+    new_tag = Tag.find_or_create_with_like_by_name(tag)
+    Tagging.create( :tag_id => new_tag.id, :context => "tags", 
+                    :taggable => tag_user, :tagger => user, :voter_name => user.name, :voter_link => user.permalink)
+  end
+
 
   def self.friends(user, friend)
     friendship = User.find(user).friendships.build(:friend_id => friend)

@@ -2,8 +2,8 @@ X - Move all the FB queries to Client.
 X - statements time (ago)
 X - statement destroy ajax call
 X - change question (dynamically)
-X- Like/dislike hover (show people)
-- Highlight like/dislike for show_me / show_friend
+X - Like/dislike hover (show people)
+X - Highlight like/dislike for show_me / show_friend
 - Tag (cloud) Random subset of the tags table (20) (*New Set link (ajax))
 - Un-give cards/ make it available for re-giving 
 - Tag page (like and dislike for tags) (look at wireframe)

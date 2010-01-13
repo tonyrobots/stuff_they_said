@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100107190533) do
+ActiveRecord::Schema.define(:version => 20100113001023) do
 
   create_table "badgeings", :force => true do |t|
     t.integer "badge_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100107190533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "score",      :default => 0
+    t.text     "vote_data"
   end
 
   create_table "taggings", :force => true do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20100107190533) do
     t.string   "taggable_type"
     t.string   "context"
     t.datetime "created_at"
+    t.boolean  "tag_vote",      :default => true
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"

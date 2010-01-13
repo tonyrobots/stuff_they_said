@@ -16,6 +16,9 @@
 				<%= user.name %>
 			</div>
 			</a>
+			Agree => <%= agree_tags(user.taggings, @tag.id)%>
+			Agree => <%= disagree_tags(user.taggings, @tag.id)%>
+
 			<br class="clear">
 		</div>	
 		<% end %>

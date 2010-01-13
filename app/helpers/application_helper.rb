@@ -25,5 +25,23 @@ module ApplicationHelper
       "zero"
     end
   end
+  
+  def agree_tags (user_tags, tag_id)
+    good_tags = " "
+    for tag in user_tags
+      good_tags << "#{tag.tagger_id.to_s} " if (tag.tag_id == tag_id && tag.tag_vote)
+    end
+    good_tags
+  end
+
+  def disagree_tags (user_tags, tag_id)
+    good_tags = " "
+    for tag in user_tags
+      good_tags << "#{tag.tagger_id.to_s} " if (tag.tag_id == tag_id && !tag.tag_vote)
+    end
+    good_tags
+  end
+
+
 
 end

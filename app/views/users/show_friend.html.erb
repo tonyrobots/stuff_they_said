@@ -7,7 +7,7 @@
 		<%= image_tag @user.image_large unless @user.image_thumb.nil? %>
 		<div id="user_tags_wrap">
 			<ul id="user_tags">
-				<% for tag in @user.tags %>
+				<% for tag in @user.tags.uniq %>
 				<li><%= link_to tag.name, tag_path(tag.name) %></li>
 				<% end %>
 			</ul>
