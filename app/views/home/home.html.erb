@@ -7,6 +7,52 @@ The best way to get others to write about you is to  <%= link_to_remote "write a
 
 <div id="describe_friend_wrap"></div>
 
+<h2>What your friends are saying:</h2>
+
+<div id="activity_wrap">
+	
+	<% for activity in @activities %>
+	<div id="activity_<%= activity.id %>" class="activity_item">
+		<% if activity.activity_type == "wrote_statement" %>
+		<span><%= activity.data[:creator_name] %> wrote about <%= activity.data[:friend_name] %></span><br class="clear">
+		<div class="connection">
+			<%= image_tag activity.data[:creator_thumb] %> => <%= image_tag activity.data[:friend_thumb] %>
+		</div>
+		<div class="content">
+			<%= activity.data[:content] %>
+		</div>
+		<% elsif activity.activity_type == "tagged"  %>
+		<span><%= activity.data[:creator_name] %> tagged <%= activity.data[:friend_name] %></span><br class="clear">
+		<div class="connection">
+			<%= image_tag activity.data[:creator_thumb] %> => <%= image_tag activity.data[:friend_thumb] %>
+		</div>
+		<div class="content">
+			<%= activity.data[:creator_name] %> tagged <%= activity.data[:friend_name] %>  as <strong><%= activity.data[:tag_name] %></strong>
+		</div>
+		<% elsif activity.activity_type == "gave_badge" %>
+		<span><%= activity.data[:friend_name] %> gave <%= activity.data[:user_name] %> a card</span><br class="clear">
+		<div class="connection">
+			<%= image_tag activity.data[:friend_thumb] %> => <%= image_tag activity.data[:user_thumb] %>
+		</div>
+		<div class="content">
+			<%= activity.data[:friend_name] %> says <%= activity.data[:user_name] %>  is his/her <%= activity.data[:badge_name] %> </strong>
+		</div>
+		<% elsif activity.activity_type == "took_badge" %>
+		<span><%= activity.data[:friend_name] %> took back a card from <%= activity.data[:user_name] %></span><br class="clear">
+		<div class="connection">
+			<%= image_tag activity.data[:friend_thumb] %> => <%= image_tag activity.data[:user_thumb] %>
+		</div>
+		<div class="content">
+			<%= activity.data[:user_name] %> says <%= activity.data[:user_name] %>  is no longer his/her <%= activity.data[:badge_name] %> </strong>
+		</div>
+		<% end %>
+		<br class="clear">
+	</div>
+	<% end %>
+	<%= will_paginate @activities %>
+</div>
+
+
 
 <% if current_user.settings[:read_stream] == 0%>
 <script>

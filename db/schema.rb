@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113020530) do
+ActiveRecord::Schema.define(:version => 20100114010135) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "friend_id"
+    t.string   "activity_type", :limit => 30
+    t.integer  "activity_id"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["creator_id", "friend_id", "activity_type", "activity_id"], :name => "unique_activity", :unique => true
 
   create_table "badgeings", :force => true do |t|
     t.integer "badge_id"

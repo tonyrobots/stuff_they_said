@@ -12,13 +12,16 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :badgeings
   has_many :badges, :through => :badgeings
+  has_many :activities, :foreign_key => "creator_id", :order => "created_at DESC"
+  
   serialize :badges_given
   serialize :settings
     
   def self.set_tag(tag, user, tag_user, state)
     new_tag = Tag.find_or_create_with_like_by_name(tag)
-    Tagging.create( :tag_id => new_tag.id, :context => "tags", 
+    tagging = Tagging.create( :tag_id => new_tag.id, :context => "tags", 
                     :taggable => tag_user, :tagger => user, :voter_name => user.name, :voter_link => user.permalink, :tag_vote => state)
+    Activity.tag_friend(tagging)
   end
 
 

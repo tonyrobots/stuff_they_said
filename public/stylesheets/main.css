@@ -96,6 +96,12 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.tag_vote li { display: inline;}
 		.tag_vote a { padding: 0 3px;}
 		
+		/* Activities */
+		.activity_item { padding: 20px 0; border-bottom: 1px solid #eee;}
+		.activity_item:hover { background: #e9e9e9;}
+		.activity_item span { margin: 0 10px;}
+		.activity_item .connection { float: left; margin: 10px; }
+		.activity_item .content { float: left; margin: 10px 10px 10px 30px;}
 /*Rails Errors
 ----------------------------*/
 #flash_notice, #flash_error { position: absolute; top: 0; padding: 5px 8px; margin: 0; width: 700px; }

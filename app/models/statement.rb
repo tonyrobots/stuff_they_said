@@ -1,10 +1,15 @@
 class Statement < ActiveRecord::Base
-  attr_accessible :vote_data
+  attr_accessible :vote_data, :by, :user_id, :content, :by_link, :friend_id
   acts_as_voteable
   serialize :vote_data
   before_create :initialize_vote_data
+  after_create  :wrote_statement
+  has_one :activity, :foreign_key => "activity_id", :dependent => :destroy  
   
-
+  def wrote_statement
+    Activity.add_statement(self)
+  end
+  
   def initialize_vote_data
     self.vote_data = {
       :likers => [], 

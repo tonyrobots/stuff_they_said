@@ -16,6 +16,8 @@ class HomeController < ApplicationController
       @random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]
       render :action => 'welcome'
     else
+      users = current_user.friends.collect {|u| u.id}
+      @activities = Activity.find_all_by_creator_id(users, :order => "created_at DESC").paginate(:page => params[:page], :per_page => 20)
       render :layout => 'main'
     end
   end
