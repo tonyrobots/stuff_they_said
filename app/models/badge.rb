@@ -13,11 +13,9 @@ class Badge < ActiveRecord::Base
       :badge_thumb => badge.image_thumb
     }
     new_badgeing = Badgeing.create :user_id => friend.id, :badge_id => badge_id, :friend_id => user.id, :data => data
-    user.badges_given = [] if user.badges_given.nil?
-    user.badges_given << badge.id
-    user.save(false)
-  new_badgeing
+    new_badgeing
   end
+
 
 
   def self.badges_left (user)

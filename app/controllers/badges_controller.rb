@@ -11,13 +11,21 @@ class BadgesController < ApplicationController
       publish_to_fb(page, friend, message)
     end  
   end
+  
+  def destroy
+    badge = Badgeing.find(params[:id])
+    badge.destroy
+    render :update do |page|
+      page.hide "card_#{params[:badge_id]}"
+    end
+  end
 
   def show
     if current_user.badges_given.nil?
       cards = Badge.all :conditions => ["giveable = ?", true]
     else
       cards = Badge.all :conditions => ["giveable = ? and id NOT IN (?)", true, current_user.badges_given]
-      cards_given = Badge.all :conditions => ["giveable = ? and id IN (?)", true, current_user.badges_given]
+      cards_given = Badgeing.all :include => :badge, :conditions => ["badgeings.friend_id=?", current_user.id]
       
     end
     render :update do |page|
