@@ -56,6 +56,12 @@ class User < ActiveRecord::Base
     self.permalink = User.page_permalink(facebook_session.user.name)
   end
 
+  def during_connect(facebook_session)
+    self.image_thumb = facebook_session.user.pic_square
+    self.image_small = facebook_session.user.pic
+    self.image_large = facebook_session.user.pic_big
+    self.save(false)
+  end
 
   def self.page_permalink(name)
     page_token = "#{name.gsub(' ', '-')}"
@@ -95,5 +101,16 @@ class User < ActiveRecord::Base
       
     )     
   end
+  
+  def self.random_fb_friend(facebook_session)
+    if(rand(2) == 1)
+      facebook_session.user.friends[rand(facebook_session.user.friends.length)]  
+    else
+      wall_users = facebook_session.fql_query("SELECT actor_id FROM stream WHERE source_id =#{facebook_session.user.uid} AND actor_id !=#{facebook_session.user.uid} limit 20")
+      random_user = wall_users[rand(wall_users.length)]
+      random_user["actor_id"]
+    end
+  end
+
 
 end

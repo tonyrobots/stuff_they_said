@@ -41,7 +41,7 @@
 		<% end %>
 			<% if moderate %>
 			<%= link_to "Respond", "/#{statement.by_link}" %>
-			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
+			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete, :confirm => "About to delete statement. Are you sure?" %>
 			<% end %>
 		</div>
 	</div>

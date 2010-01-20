@@ -69,9 +69,10 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.actions a { margin: 0 2px;}
 		
 		#describe_friend { margin: 10px; }
-		#describe_friend .user_img { margin: 0 10px;}
+		#describe_friend .user_img { margin: 0 10px; }
+		.user_img img { max-width: 150px; }
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
-		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#describe_friend .input_box textarea { margin: 10px; min-width: 650px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
 
 		#notifications { margin: 10px 5px; padding: 10px; background-color: #6C6; font-size: 16px;}
 		

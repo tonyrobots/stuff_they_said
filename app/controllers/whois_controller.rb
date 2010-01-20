@@ -21,7 +21,7 @@ class WhoisController < ApplicationController
       @user = User.find params[:whois][:user_id], :select => "id, name, current_whois, permalink, facebook_uid"
       message = "#{current_user.name} described #{@user.name}: #{@whois.content}"
       respond_to do |format|
-        format.html { redirect_to user_page_url(@user.permalink) }
+        format.html { redirect_to home_url }
         format.js do
           render :update do |page|
             page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }
@@ -60,18 +60,9 @@ class WhoisController < ApplicationController
   end
   
   def describe_friend
-    random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]
+    random_user = User.random_fb_friend(facebook_session)
     render :update do |page|
       page.replace_html "describe_friend_wrap", :partial => 'shared/describe_friend', :locals => { :fbuid => random_user }
     end
   end
-  
-  def get_close_friend 
-    wall_users = facebook_session.fql_query("SELECT actor_id FROM stream WHERE source_id =#{current_user.facebook_uid} AND actor_id !=#{current_user.facebook_uid} limit 20")
-    random_user = wall_users[rand(wall_users.length)]
-    render :update do |page|
-      page.replace_html "describe_friend_wrap", :partial => 'shared/describe_friend', :locals => { :fbuid => random_user["actor_id"] }
-    end
-  end
-  
 end

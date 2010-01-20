@@ -24,6 +24,15 @@ class StatementsController < ApplicationController
     end
   end  
   
+  def describe_friend
+    @statement = Statement.new(params[:statement])
+    user_id = Whois.new_user(current_user.id, params[:fb_user], facebook_session)
+    @statement.user_id = user_id
+    if @statement.save
+      redirect_to home_url
+    end
+  end
+  
   def edit
     @statement = Statement.find(params[:id])
   end

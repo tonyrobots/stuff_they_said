@@ -1,0 +1,23 @@
+<div id="describe_friend">
+	<h2>
+		Write about <strong><%= fb_name fb_user, :linked => false %></strong>
+	</h2>
+	<div class="user_img left">		
+		<%= fb_profile_pic fb_user, :size => :normal %>
+	</div>
+	<div class="input_box">
+	  <% form_for :statement, :url => { :controller => "statements", :action => "describe_friend" }, :id => "statment_form" do |f| %>
+	    <%= f.hidden_field :friend_id, :value => current_user.id %>
+	    <%= f.hidden_field :by, :value => current_user.name %>
+	    <%= f.hidden_field :by_link, :value => current_user.permalink %>
+	    <%= hidden_field_tag :fb_user, fb_user %>
+	    <%= f.text_area :content, :class => "content", :value => random_question(user_name) %><br class="clear">
+		<span class="right">
+		<%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%>
+		<%= f.submit "Say It" %>
+		<br class="clear">
+		</span>
+		<% end %>
+	</div>
+	<br class="clear">
+</div>

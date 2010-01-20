@@ -1,8 +1,8 @@
 <div id="describe_friend">
-	<div class="blurb">
-		Describe <strong><%= fb_name fbuid, :linked => false %></strong> in a single sentence. Humor is good.  <br class="clear">		 
+	<h2>
+		Describe <strong><%= fb_name fbuid, :linked => false %></strong> in a single sentence. Humor is good.	 
 		<%= link_to_remote "Describe a different friend", :url => { :controller => "whois", :action => "describe_friend" } %>
-	</div>
+	</h2>
 	<div class="user_img left">		
 		<%= fb_profile_pic fbuid, :size => :normal %>
 	</div>
@@ -19,10 +19,11 @@
 		    <%= f.hidden_field :by_link, :value => current_user.permalink %>
 		    <%= f.text_area :content %><br>
 			<span class="right">
-				<%= f.submit "Submit" %> <%= link_to "Skip this page", home_path %>
+				<%= f.submit "Submit" %>
 			</span>
 		<% end %>
 	</div>
+	<br class="clear">
 </div>
 <script type='text/javascript' charset='utf-8'>
 	FB.XFBML.Host.parseDomTree();	

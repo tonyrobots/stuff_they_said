@@ -36,7 +36,7 @@ class TagsController < ApplicationController
     user = User.find params[:user_id]
     tags = params[:tag].split(',')
     for tag in tags
-      User.set_tag(tag.downcase, current_user, user, true)
+      User.set_tag(Sanitize.clean(tag.downcase), current_user, user, true) if tag.length < 25
     end
     user.save(false)
     message = "#{current_user.name} tagged #{user.name} as #{params[:tag]}"

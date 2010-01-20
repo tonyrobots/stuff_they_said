@@ -2,9 +2,13 @@ class Statement < ActiveRecord::Base
   attr_accessible :vote_data, :by, :user_id, :content, :by_link, :friend_id
   acts_as_voteable
   serialize :vote_data
-  before_create :initialize_vote_data
+  before_create :initialize_vote_data, :sanit 
   after_create  :wrote_statement
   has_one :activity, :foreign_key => "activity_id", :dependent => :destroy  
+
+  def sanit
+    self.content = Sanitize.clean(self.content)
+  end
   
   def wrote_statement
     Activity.add_statement(self)

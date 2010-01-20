@@ -1,11 +1,18 @@
 <% title "Home", false %>
 
 <div id="notifications">
-The best way to get others to write about you is to  <%= link_to_remote "write about them!", :url => { :controller => "whois", :action => "describe_friend" } %>
-<%= link_to_remote "Close Friend ", :url => { :controller => "whois", :action => "get_close_friend" } %>
+	<strong><%= user_notificaion @notification %></strong><br class="clear">
+	The best way to get others to write about you is to  <%= link_to_remote "write about them!", :url => { :controller => "whois", :action => "describe_friend" } %>
 </div>
 
-<div id="describe_friend_wrap"></div>
+<div id="describe_friend_wrap">
+	<% if @dtype == 1 %>
+	<%= render :partial => 'shared/describe_friend', :locals => { :fbuid => @random_user } %>
+	<% else %>
+	<%= render :partial => "shared/describe_friend_statement", :locals => { :fb_user => @random_user, :user_name => @new_fb_user.name } %>
+	<% end %>
+</div>
+
 
 <h2>What your friends are saying:</h2>
 
@@ -14,33 +21,33 @@ The best way to get others to write about you is to  <%= link_to_remote "write a
 	<% for activity in @activities %>
 	<div id="activity_<%= activity.id %>" class="activity_item">
 		<% if activity.activity_type == "wrote_statement" %>
-		<span><%= activity.data[:creator_name] %> wrote about <%= activity.data[:friend_name] %></span><br class="clear">
+		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link]  %> wrote about <%= activity.data[:friend_name] %></span><br class="clear">
 		<div class="connection">
-			<%= image_tag activity.data[:creator_thumb] %> => <%= image_tag activity.data[:friend_thumb] %>
+			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:content] %>
 		</div>
 		<% elsif activity.activity_type == "tagged"  %>
-		<span><%= activity.data[:creator_name] %> tagged <%= activity.data[:friend_name] %></span><br class="clear">
+		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link] %> tagged <%= link_to activity.data[:friend_name], activity.data[:friend_link] %></span><br class="clear">
 		<div class="connection">
-			<%= image_tag activity.data[:creator_thumb] %> => <%= image_tag activity.data[:friend_thumb] %>
+			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:creator_name] %> tagged <%= activity.data[:friend_name] %>  as <strong><%= activity.data[:tag_name] %></strong>
 		</div>
 		<% elsif activity.activity_type == "gave_badge" %>
-		<span><%= activity.data[:friend_name] %> gave <%= activity.data[:user_name] %> a card</span><br class="clear">
+		<span><%= link_to activity.data[:friend_name], activity.data[:friend_link] %> gave <%= link_to activity.data[:user_name], activity.data[:user_link] %> a card</span><br class="clear">
 		<div class="connection">
-			<%= image_tag activity.data[:friend_thumb] %> => <%= image_tag activity.data[:user_thumb] %>
+			<%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>  => <%= link_to image_tag(activity.data[:user_thumb]), activity.data[:user_link] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:friend_name] %> says <%= activity.data[:user_name] %>  is his/her <%= activity.data[:badge_name] %> </strong>
 		</div>
 		<% elsif activity.activity_type == "took_badge" %>
-		<span><%= activity.data[:friend_name] %> took back a card from <%= activity.data[:user_name] %></span><br class="clear">
+		<span><%= link_to activity.data[:friend_name], activity.data[:friend_link] %> took back a card from  <%= link_to activity.data[:user_name], activity.data[:user_link] %></span><br class="clear">
 		<div class="connection">
-			<%= image_tag activity.data[:friend_thumb] %> => <%= image_tag activity.data[:user_thumb] %>
+			<%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %> => <%= link_to image_tag(activity.data[:user_thumb]), activity.data[:user_link] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:user_name] %> says <%= activity.data[:user_name] %>  is no longer his/her <%= activity.data[:badge_name] %> </strong>

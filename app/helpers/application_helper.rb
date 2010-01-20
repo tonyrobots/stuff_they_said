@@ -60,6 +60,16 @@ module ApplicationHelper
     end
     score
   end
-
-
+  
+  def user_notificaion(activity)
+     if activity.activity_type == "wrote_statement" 
+       "#{activity.data[:creator_name]} wrote about you! #{link_to 'Check it out!', activity.data[:friend_link]}"
+		 elsif activity.activity_type == "tagged"  
+       "#{activity.data[:creator_name]} tagged you! #{link_to 'Check it out!', activity.data[:friend_link]}"
+		 elsif activity.activity_type == "gave_badge" 
+       "#{activity.data[:friend_name]} gave you a badge! #{link_to 'Check it out!', activity.data[:user_link]}"
+		 elsif activity.activity_type == "took_badge" 
+       "#{activity.data[:friend_name]} took a badge away from you! #{link_to 'Check it out!', activity.data[:user_link]}"
+		 end 
+  end
 end
