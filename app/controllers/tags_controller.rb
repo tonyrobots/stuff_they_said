@@ -43,7 +43,7 @@ class TagsController < ApplicationController
 
     render :update do |page|
       for tag in tags
-        page.insert_html :bottom, 'user_tags', "<li><a href=\"/tag/#{tag.strip}\">#{tag.strip}</a></li>"
+        page.insert_html(:bottom, 'user_tags', "<li><a href=\"/tag/#{tag.strip}\">#{tag.strip}</a></li>") if tag.length < 25
         page["tag"].value = ""
       end
       publish_to_fb(page, user, message)
