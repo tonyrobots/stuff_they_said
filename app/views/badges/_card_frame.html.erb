@@ -1,5 +1,4 @@
 <h3> You have <%= cards.count %> to give </h3> 
-
 <div id="cards_wrap">	
 	<% for card in cards %>
 	<div id="card_<%= card.id %>" class="card">
@@ -14,9 +13,9 @@
 	<br class="clear">
 </div>
 
-<h3> You have already given <%= pluralize cards_given.count, "card" %> </h3> 
 
 <% if cards_given %>
+<h3> You have already given <%= pluralize(cards_given.count, "card")   %> </h3> 
 <div id="cards_wrap_given">	
 	<% for card in cards_given %>
 	<div id="card_<%= card.badge.id %>" class="card">
