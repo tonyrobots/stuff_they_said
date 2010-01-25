@@ -47,7 +47,8 @@ class User < ActiveRecord::Base
     self.settings = {
       :read_stream => 0, 
       :publish_stream => 0,
-      :last_publish => nil
+      :last_publish => nil,
+      :pic_update => Time.now
     }
     self.name = facebook_session.user.name
     self.image_thumb = facebook_session.user.pic_square
@@ -55,12 +56,15 @@ class User < ActiveRecord::Base
     self.image_large = facebook_session.user.pic_big
     self.permalink = User.page_permalink(facebook_session.user.name)
   end
-
+  
   def during_connect(facebook_session)
-    self.image_thumb = facebook_session.user.pic_square
-    self.image_small = facebook_session.user.pic
-    self.image_large = facebook_session.user.pic_big
-    self.save(false)
+    if self.settings[:pic_update] < 1.day.ago 
+      self.image_thumb = facebook_session.user.pic_square
+      self.image_small = facebook_session.user.pic
+      self.image_large = facebook_session.user.pic_big
+      self.settings[:pic_update] = Time.now
+      self.save(false)
+    end
   end
 
   def self.page_permalink(name)

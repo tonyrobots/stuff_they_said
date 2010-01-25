@@ -1,16 +1,45 @@
+Help make these instructions better, submit your improvements via github.
+
 == Install and use
 
-=== 1. Install the facebooker gem and make Rails use it
+=== 1. Install facebooker as gem or plugin
+
+You can install facebooker as a gem or as a plugin.
+
+====If you want to install facebooker as a gem
 
   $ sudo gem install facebooker
 
-Make sure that you have setup you config/facebooker.yml to match your facebook application, make you application depended on the facebooker gem 
+Make your application dependent on the facebooker gem 
 
   config.gem "facebooker"
 
-and run the xd_receiver generator to create the cross domain scripting bridge to make it possible for your application to communicate with facebook
+====If you want to install facebooker as a plugin
+
+  $ script/plugin install git://github.com/mmangino/facebooker.git
+
+====Once you've installed facebooker gem or plugin====
+
+Run the xd_receiver generator to create the cross domain scripting bridge to
+make it possible for your application to communicate with facebook
 
   $ script/generate xd_receiver
+  
+Copy the template facebooker.yml from the facebooker gem source to your rails
+app at config/facebooker.yml.
+
+Next create a facebook application for your development environment at
+http://www.facebook.com/developers/createapp.php
+
+Once you've created your Facebook app, you will be shown an api_key and a
+secret_key. These should be copied into the development section of
+config/facebooker.yml.  In facebooker.yml also set the callback_url to the home
+page of your development app, e.g. http://localhost:3000.
+
+Add the following 2 lines to your application(_controller).rb (ApplicationController):
+
+  # Facebooker docs recommend this to prevent Facebook TOS violation.
+  filter_parameter_logging :fb_sig_friends
 
 For more information on the facebooker gem checkout it's readme http://github.com/mmangino/facebooker/tree/master 
 
@@ -26,9 +55,11 @@ This plugin should soon be packed inside a gem.
     def self.up
       add_column :users, :name, :string
       add_column :users, :facebook_uid, :integer, :limit => 8
+      add_column :users, :facebook_session_key, :string
     end
   
     def self.down
+      remove_column :users, :facebook_session_key
       remove_column :users, :facebook_uid
       remove_column :users, :name
     end
@@ -36,7 +67,10 @@ This plugin should soon be packed inside a gem.
 
 === 4. Make your layout look something like this
 
-The important parts are the facebook html namespace, facebook javascript include and the facebook helper calls to init the facebooker gem. 
+The important parts are:
+* The facebook html namespace in the opening html tag
+* The javascript include call, fb_connect_javascript_tag
+* The init_fb_connect call. 
 
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -44,12 +78,10 @@ The important parts are the facebook html namespace, facebook javascript include
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title>Your awsome facebook connected app</title>
+    <title>Your awesome facebook connected app</title>
     
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag :defaults %>
-    
-    <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
   </head>
   <body>
   
@@ -66,14 +98,48 @@ The important parts are the facebook html namespace, facebook javascript include
 === 5. Add the Facebook Connect button to your login form
 
   <%= authlogic_facebook_login_button %>
+  
+  If the path to create an authlogic session is not mapped to 
+  the /user_session route then you will need to pass in a :controller option,
+  e.g.
+  
+  <%= authlogic_facebook_login_button :controller => 'path_to_create_session' %>
+  
+  If you are using jquery instead of the default prototype library, then:
+  
+  <%= authlogic_facebook_login_button :js => :jquery %>
+  
+  You can also pass in additional options to authlogic_facebook_login_button that
+  will be passed on to facebooker's fb_login_button method to alter behaviour
+  and formatting of the button, e.g.:
+  
+  <%= authlogic_facebook_login_button :size => 'large',
+    :length => 'long', :autologoutlink => true, :v => 2 %>
 
 === Notes
 
-If you want to save some user data when connecting to facebook you can use the before_connect hook in your user model.
+==== before_connect hook
+If you want to save some user data when connecting to facebook you can define the
+before_connect hook in your user model.  before_connect is called the first
+time a facebook user authenticates with your application.
+
+This hook is a good place to set values for authlogic required credentials or you can
+make credentials optional by allowing nulls in the database. See the authlogic
+example app migration for more on optional credential columns.
+
+The only credential column that is not optional is persistence token. You can
+ensure this is set in before_connect with reset_persistence_token.
+
+Here is an example implementation of the before_connect hook:
 
   def before_connect(facebook_session)
     self.name = facebook_session.user.name
+    # Set required credentials
+    reset_persistence_token
   end
   
 For more information about what you can get form the facebook_session checkout the Facebooker gem rdoc. 
-  
+
+
+
+Help make these instructions better, submit your improvements via github.

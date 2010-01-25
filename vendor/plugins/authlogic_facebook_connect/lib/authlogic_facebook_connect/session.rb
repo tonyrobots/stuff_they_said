@@ -8,23 +8,6 @@ module AuthlogicFacebookConnect
     end
 
     module Config
-      # Should the user be saved with our without validations?
-      #
-      # The default behavior is to save the user without validations and then
-      # in an application specific interface ask for the additional user
-      # details to make the user valid as facebook just provides a facebook id.
-      #
-      # This is useful if you do want to turn on user validations, maybe if you
-      # just have facebook connect as an additional authentication solution and
-      # you already have valid users.
-      #
-      # * <tt>Default:</tt> true
-      # * <tt>Accepts:</tt> Boolean
-      def facebook_valid_user(value = nil)
-        rw_config(:facebook_valid_user, value, false)
-      end
-      alias_method :facebook_valid_user=, :facebook_valid_user
-
       # What user field should be used for the facebook UID?
       #
       # This is useful if you want to use a single field for multiple types of
@@ -57,17 +40,22 @@ module AuthlogicFacebookConnect
       end
       alias_method :facebook_user_class=, :facebook_user_class
 
-      # Should a new user creation be skipped if there is no user with given facebook uid?
+      # A chain of symbols of method names called in order to vivify a
+      # user from your application from the facebook user session
+      # credentials.  Each method is called in sequence until one
+      # returns on a non-nil, non-false value, which should be the
+      # application user.  Each method is passed the facebook_session
+      # as its only argument.  If the last method in the chain builds a
+      # new application user object, this is the equivalent to the old
+      # style of creating a new user.
       #
-      # The default behavior is not to skip (hence create new user). You may want to turn it on
-      # if you want to try with different model.
-      #
-      # * <tt>Default:</tt> false
-      # * <tt>Accepts:</tt> Boolean
-      def facebook_skip_new_user_creation(value = nil)
-        rw_config(:facebook_skip_new_user_creation, value, false)
+      # * <tt>Default:</tt> [:find_by_facebook_uid, :build_new_user]
+      # * <tt>Accepts:</tt> Array
+      def facebook_application_user_vivify_chain(value = nil)
+        rw_config(:facebook_application_user_vivify_chain, value, [:find_by_facebook_uid, :build_new_user])
       end
-      alias_method :facebook_skip_new_user_creation=, :facebook_skip_new_user_creation
+      alias_method :facebook_application_user_vivify_chain=, :facebook_application_user_vivify_chain
+
     end
 
     module Methods
@@ -85,39 +73,26 @@ module AuthlogicFacebookConnect
 
       def validate_by_facebook_connect
         facebook_session = controller.facebook_session
-        self.attempted_record = facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
+        #self.attempted_record = klass.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
 
-        self.attempted_record.send(:"#{facebook_session_key_field}=", facebook_session.session_key) if self.attempted_record
+        # call each vivify method and return the results of any
+        # non-nil, non-false method in the chain
+        self.attempted_record = facebook_application_user_vivify_chain.inject(nil) { |memo, vivify_method| !memo ? send(vivify_method, facebook_session) : memo }
 
-        begin
-          unless self.attempted_record
-            # Get the user from facebook and create a local user.
-            #
-            # We assign it after the call to new in case the attribute is protected.
-            new_user = klass.new
-            new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
- 
-            RAILS_DEFAULT_LOGGER.error("new user from FB #{facebook_session.inspect}")
-            new_user.before_connect(facebook_session) if new_user.respond_to?(:before_connect)
-            
-            self.attempted_record = new_user
-            
-            if facebook_valid_user
-              errors.add_to_base(
-                I18n.t('error_messages.facebook_user_creation_failed',
-                       :default => 'There was a problem creating a new user ' +
-                                   'for your Facebook account')) unless self.attempted_record.valid?
- 
-              self.attempted_record = nil
-            else
-              self.attempted_record.save_with_validation(false)
-            end
-          else
-              self.attempted_record.during_connect(facebook_session) if self.attempted_record.respond_to?(:during_connect)
-          end
-        rescue Facebooker::Session::SessionExpired
-          errors.add_to_base(I18n.t('error_messages.facebooker_session_expired',
-            :default => "Your Facebook Connect session has expired, please reconnect."))
+        # if we've found an application user, either one that already
+        # existed or one that is brand new, keep processing
+        unless self.attempted_record.nil?
+          # set the session key into the user account
+          self.attempted_record.send("#{facebook_session_key_field}=", facebook_session.session_key) if self.attempted_record.respond_to?("#{facebook_session_key_field}=")
+
+          # call either before or during connect callback based on the
+          # state of the application user
+          callback = self.attempted_record.new_record? ? :before : :during
+          self.attempted_record.send("#{callback}_connect", facebook_session) if self.attempted_record.respond_to?("#{callback}_connect")
+
+          # now save our user, which has either been found or created, but
+          # has been imbued with the session_key at least
+          self.attempted_record.save_with_validation(false)
         end
       end
       
@@ -127,14 +102,13 @@ module AuthlogicFacebookConnect
       end
 
       def authenticating_with_facebook_connect?
-        controller.set_facebook_session
-        attempted_record.nil? && errors.empty? && controller.facebook_session
+        if controller.respond_to?(:controller) && controller.controller.respond_to?(:set_facebook_session)
+          controller.set_facebook_session
+          attempted_record.nil? && errors.empty? && controller.facebook_session
+        end
       end
 
-      private
-      def facebook_valid_user
-        self.class.facebook_valid_user
-      end
+    private
 
       def facebook_uid_field
         self.class.facebook_uid_field
@@ -144,13 +118,23 @@ module AuthlogicFacebookConnect
         self.class.facebook_session_key_field
       end
 
+      #def facebook_skip_new_user_creation
+      #  self.class.facebook_skip_new_user_creation
       def facebook_user_class
         self.class.facebook_user_class
       end
 
-      def facebook_skip_new_user_creation
-        self.class.facebook_skip_new_user_creation
+      def facebook_application_user_vivify_chain
+        self.class.facebook_application_user_vivify_chain
       end
+
+      def find_by_facebook_uid(facebook_session)
+        facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
+      end
+
+      def build_new_user(facebook_session)
+        facebook_user_class.new(facebook_uid_field => facebook_session.user.uid)
+      end      
     end
   end
 end

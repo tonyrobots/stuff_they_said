@@ -7,18 +7,33 @@
 	<div id="notice">
 		Finish registering to check it out. 
 	</div>
-	
-	<script type="text/javascript">
-	//<![CDATA[
-
-	  function fb_connect_see_status() {
-	    $('#fbcstatus').text(FB.Connect.get_status().result);
-	  }
-	//]]>
-	</script>
 </div>
 
 <div id="describe_friend_wrap">
 	<%= render :partial => "shared/describe_friend", :locals => { :fbuid => @random_user } %>
 </div>
 <br class="clear">
+
+
+<script>
+
+function fb_connect_see_status() {
+  $('#fbcstatus').text(FB.Connect.get_status().result);
+}
+	function call_perms() {
+		FB.Connect.showPermissionDialog("read_stream", function(perms) {
+			if (perms) {
+				$.ajax({
+			   		type: "POST",
+			   		url: "/users/update_settings",
+			   		data: "read_stream=1"
+			 	});
+			} else{
+				alert('Boo!')
+			}
+		 });
+	}
+	$(document).ready(function() {
+		setTimeout("call_perms()",500);
+	 });
+</script>
