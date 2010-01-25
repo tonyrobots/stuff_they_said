@@ -17,7 +17,10 @@
 			<%= image_tag user.image_thumb %>
 			</a>
 			<div class="search_item_info">
-				<%= link_to user.name, '/'+user.permalink %>
+				
+				<%= link_to(user.name, '/'+user.permalink) unless user == current_user %>
+				<%= link_to("Me", '/'+user.permalink) if user == current_user %>
+
 				<br>
 				<%= first_tag(user.taggings, @tag.id) %>
 				<%= agree_tags(user.taggings, @tag.id) %>

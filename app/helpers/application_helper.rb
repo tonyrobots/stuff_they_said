@@ -6,13 +6,13 @@ module ApplicationHelper
   end
   
 
-  def publish_to_fb(page, to_user, message)
+  def publish_to_fb(page, to_user, action, action_link, message, message_link)
     if current_user.settings[:publish_stream] == 0
-      page << "first_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\");"
+      page << "first_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, '#{action}', '#{action_link}', '#{message}', '#{message_link}');"
     elsif current_user.settings[:publish_stream] == -1
-      page << "fb_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", false);";
+      page << "fb_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, '#{action}', '#{action_link}', '#{message}', '#{message_link}', false);";
     else
-      page << "fb_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, 'about me', 'http://google.com', \"#{message}\", true);";
+      page << "fb_publish(#{current_user.facebook_uid}, #{to_user.facebook_uid}, '#{action}', '#{action_link}', '#{message}', '#{message_link}', true);";
     end
   end
   
@@ -37,8 +37,9 @@ module ApplicationHelper
   
   def agree_tags(user_tags, tag_id)
     good_tags = ""
+    first_tag = user_tags.first
     for tag in user_tags
-      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && tag.tag_vote)
+      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && tag.tag_vote && tag != first_tag)
     end
     good_tags
     "<div class=\"tag_vote\"><ul><li>Agreed by </li>#{good_tags}</ul></div>" if good_tags != ""
@@ -46,8 +47,9 @@ module ApplicationHelper
 
   def disagree_tags(user_tags, tag_id)
     good_tags = ""
+    first_tag = user_tags.first
     for tag in user_tags
-      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && !tag.tag_vote)
+      good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && !tag.tag_vote && tag != first_tag)
     end
     "<div class=\"tag_vote\"><ul><li>Disgreed by </li>#{good_tags}</ul></div>" if good_tags != ""
   end

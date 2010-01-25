@@ -19,7 +19,7 @@
 				<%= render :partial => "badges/card", :collection => @user.badgeings, :as => :card %>
 				<br class="clear">
 			</div>
-			You have <%= @badges %> cards left to give
+			<%= link_to_remote "You have #{@badges} cards left to give", :url => { :controller => "badges", :action => "show", :id => @user.id }, :method => :get, :complete => "load_box()",  :html => {:class => "give_card"} %>
 
 		</div>
 	</div>
@@ -29,6 +29,10 @@
 		<% if  @user.current_whois != 0 %>
 		<div id="user_whois">
 			<%= render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => false, :change => true } %>
+			<% form_for current_user do |f| %>
+				<%= f.hidden_field :current_whois, :value => 0 %>
+				<%= f.submit "Clear who is" %>
+			<% end %>
 		</div>
 		<% end %>
 		<div id="user_statements">
@@ -36,5 +40,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+
+function load_box(){
+	$('#card_frame').show();
+	$.fn.colorbox({width:'500px', inline:true, href:'#card_frame', open:true,
+	onCleanup:function(){ $('#card_frame').hide(); }					
+	});
+}
+
+</script>
+
+<div id="card_frame" style="display:none"></div>
 
 

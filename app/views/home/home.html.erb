@@ -1,7 +1,7 @@
 <% title "Home", false %>
 
 <div id="notifications">
-	<strong><%= user_notificaion @notification %></strong><br class="clear">
+	<strong><%= user_notificaion(@notification) unless @notificatio.nil? %></strong><br class="clear">
 	The best way to get others to write about you is to  <%= link_to_remote "write about them!", :url => { :controller => "whois", :action => "describe_friend" } %>
 </div>
 

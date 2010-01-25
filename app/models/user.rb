@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
              :conditions => ['name like ?', "%#{search}%"], :order => 'name'
   end  
   
-  def self.publishto_fb(fb_session, from, to, action_name, action_link, message)
+  def self.publishto_fb(fb_session, from, to, action_name, action_link, message, message_link)
 
     attachment = {
       :name =>  message,

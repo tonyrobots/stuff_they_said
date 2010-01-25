@@ -25,9 +25,15 @@ class UsersController < ApplicationController
     end
     redirect_to "/#{user.permalink}"
   end
+
+
+  def update
+    current_user.update_attributes(params[:user])
+    current_user.save(false)
+    redirect_to user_page_path(current_user.permalink)
+  end
   
   def update_settings
-    
     current_user.settings[:read_stream] = params[:read_stream].to_i  if params[:read_stream]
     current_user.settings[:publish_stream] = params[:publish_stream].to_i  if params[:publish_stream]
     current_user.save(false)

@@ -19,7 +19,7 @@ class StatementsController < ApplicationController
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
         page["statement_content"].value = ""
-        publish_to_fb(page, user, message)
+        publish_to_fb(page, user, "Users Page", "http://user_page_link", message, "http://user_page_link")
       end
     end
   end  

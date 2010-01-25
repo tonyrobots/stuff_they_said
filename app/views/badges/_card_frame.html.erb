@@ -3,8 +3,12 @@
 <div id="cards_wrap">	
 	<% for card in cards %>
 	<div id="card_<%= card.id %>" class="card">
+		<% if user.to_i == friend.to_i %>
+		<%= card.name %>
+		<% else %>
 		<%= link_to_remote card.name,  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, 
 		:method => :post %>
+		<% end %>
 	</div>
 	<% end %>
 	<br class="clear">

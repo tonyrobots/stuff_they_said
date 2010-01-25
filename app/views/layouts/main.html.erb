@@ -46,7 +46,7 @@
 			var publish_stream_status = <%= current_user.settings[:publish_stream] %>;
 			var last_publish = "<%= current_user.settings[:last_publish] %>";
 			
-			function first_publish(from, to, action_msg, action_link, message){
+			function first_publish(from, to, action_msg, action_link, message, message_link){
 
 				FB.Connect.showPermissionDialog("publish_stream", function(perms) {
 					var status; 
@@ -67,14 +67,14 @@
 				 	}, false);
 					
 					
-					fb_publish(from, to, action_msg, action_link, message, auto_pub)
+					fb_publish(from, to, action_msg, action_link, message, message_link,  auto_pub)
 				 });
 			}
 			
-			function fb_publish(from, to, action_msg, action_link, message, auto_pub){
+			function fb_publish(from, to, action_msg, action_link, message, message_link, auto_pub){
 				var attach = {
 					'name': message,
-					'href': 'http://www.google.com'
+					'href': message_link
 				};
 				links = [{'text':action_msg ,'href': action_link }];
 				setTimeout(function() { FB.Connect.streamPublish('', attach, links, to, '', null, auto_pub); }, 200);

@@ -19,13 +19,13 @@ class WhoisController < ApplicationController
     @whois = Whois.new(params[:whois])
     if @whois.save
       @user = User.find params[:whois][:user_id], :select => "id, name, current_whois, permalink, facebook_uid"
-      message = "#{current_user.name} described #{@user.name}: #{@whois.content}"
+      message = "#{current_user.name} described #{@user.name}: #{@whois.content} "
       respond_to do |format|
         format.html { redirect_to home_url }
         format.js do
           render :update do |page|
             page.replace_html "user_whois", :partial => 'shared/new_whois', :locals => { :user => @user, :whois => @whois }
-            publish_to_fb(page, @user, message)
+            publish_to_fb(page, @user, "Users Page", "http://user_page_link", message, "http://user_page_link")
           end
         end
       end

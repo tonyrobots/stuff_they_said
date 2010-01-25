@@ -8,7 +8,7 @@ class BadgesController < ApplicationController
     render :update do |page|
       page.hide "card_#{params[:id]}"
       page.insert_html :top, 'profile_cards_wrap', :partial => 'badges/card', :locals => { :card => badge }
-      publish_to_fb(page, friend, message)
+      publish_to_fb(page, friend, "Users Page", "http://user_page_link", message, "http://user_page_link")
     end  
   end
   
