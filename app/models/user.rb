@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   
   def during_connect(facebook_session)
     begin
-      if self.settings[:pic_update] < 1.day.ago 
+      if !self.settings.nil? && self.settings[:pic_update] < 1.day.ago
         self.image_thumb = facebook_session.user.pic_square
         self.image_small = facebook_session.user.pic
         self.image_large = facebook_session.user.pic_big
