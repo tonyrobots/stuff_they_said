@@ -14,9 +14,9 @@
 		<% user = {:permalink=>current_user.permalink, :name=>current_user.name, :id=> current_user.id} %>
 		
 			<% if(statement.vote_data[:likers].include?(user)) %>
-			<span class="voted left">Like</span>
+			<span id="like-<%= statement.id %>" class="voted left">Like</span>
 			<% else %>
-			<%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post, :html => {:class => "left"}%>
+			<span id="like-<%= statement.id %>" class="left"> <%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post %></span>
 			<% end %>
 			<div id="statement_vote_<%= statement.id %>" class="left score <%= score_class(statement.score) %>">
 			<%= statement.score %>
@@ -34,9 +34,9 @@
 				</div>
 			</div>
 			<% if statement.vote_data[:dislikers].include?(user) %>
-			<span class="voted left">Dilike</span>
+			<span id="dislike-<%= statement.id %>" class="voted left">Dilike</span>
 			<% else %>
-			<%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post, :html => {:class => "left"} %>
+			<span id="dislike-<%= statement.id %>" class="left"><%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %></span>
 			<% end %>
 		<% end %>
 			<% if moderate %>
