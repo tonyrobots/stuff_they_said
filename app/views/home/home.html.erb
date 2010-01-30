@@ -21,7 +21,7 @@
 <% for activity in @activities %>
 	<div id="activity_<%= activity.id %>" class="activity_item">
 	<% if activity.activity_type == "wrote_statement" %>
-		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link]  %> wrote about <%= link_to activity.data[:friend_name], activity.data[:friend_link] %></span><br class="clear">
+		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link]  %> wrote about <%= link_to activity.data[:friend_name], activity.data[:friend_link]	 %></span><br class="clear">
 		<div class="connection">
 			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
 		</div>
