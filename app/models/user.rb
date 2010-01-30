@@ -45,12 +45,7 @@ class User < ActiveRecord::Base
   
   def before_connect(facebook_session)
     begin
-      self.settings = {
-        :read_stream => 0, 
-        :publish_stream => 0,
-        :last_publish => nil,
-        :pic_update => Time.now
-      }
+      self.settings = set_settings
       self.name = facebook_session.user.name
       self.image_thumb = facebook_session.user.pic_square
       self.image_small = facebook_session.user.pic
@@ -62,6 +57,7 @@ class User < ActiveRecord::Base
   
   def during_connect(facebook_session)
     begin
+      self.settings = set_settings if self.settings.nil?
       if !self.settings.nil? && self.settings[:pic_update] < 1.day.ago
         self.image_thumb = facebook_session.user.pic_square
         self.image_small = facebook_session.user.pic
@@ -121,6 +117,13 @@ class User < ActiveRecord::Base
       random_user["actor_id"]
     end
   end
-
-
+  
+  def set_settings
+    {
+      :read_stream => 0, 
+      :publish_stream => 0,
+      :last_publish => nil,
+      :pic_update => Time.now
+    }
+  end
 end
