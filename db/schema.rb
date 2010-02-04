@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "activities", ["creator_id", "friend_id", "activity_type", "activity_id"], :name => "unique_activity", :unique => true
 
   create_table "badgeings", :force => true do |t|
