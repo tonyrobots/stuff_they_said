@@ -12,7 +12,11 @@ class HomeController < ApplicationController
 
   def home
     @dtype = rand(2)  
-    @random_user = User.random_fb_friend(facebook_session)
+    if read_stream? 
+      @random_user = User.random_fb_friend(facebook_session)
+    else
+      @random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]    
+    end
     if @dtype == 0
       @new_fb_user = facebook_session.fql_query("SELECT name,pic FROM user WHERE uid=#{@random_user}").first
     end

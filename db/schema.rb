@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type",                    :null => false
+    t.string   "voteable_type", :default => "",    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

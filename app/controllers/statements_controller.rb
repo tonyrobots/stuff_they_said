@@ -14,7 +14,7 @@ class StatementsController < ApplicationController
   def create
     @statement = Statement.new(params[:statement])
     user = User.find params[:statement][:user_id], :select => "facebook_uid, name"
-    message = @statement.content
+    message = @statement.content.gsub(/'/, "")
     if @statement.save
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
@@ -65,8 +65,8 @@ class StatementsController < ApplicationController
     begin
       statement = Statement.find params[:id]
       if params[:type] == "like"
-        Statement.add_voter(true, current_user, statement)
         current_user.vote_for(statement)
+        Statement.add_voter(true, current_user, statement)
       else
         current_user.vote_against(statement)  
         Statement.add_voter(false, current_user, statement)
@@ -77,6 +77,8 @@ class StatementsController < ApplicationController
       statement.update_attribute(:score, score)
       render :update do |page|
         page.replace_html "statement_vote_#{params[:id]}", score
+        page.replace_html "#{params[:type]}-#{params[:id]}", "#{params[:type]}"
+        page["#{params[:type]}-#{params[:id]}"].addClass('voted');
       end
     rescue ActiveRecord::StatementInvalid
       render :update do |page|

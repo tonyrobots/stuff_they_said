@@ -18,17 +18,17 @@
 
 <div id="activity_wrap">
 	
-	<% for activity in @activities %>
+<% for activity in @activities %>
 	<div id="activity_<%= activity.id %>" class="activity_item">
-		<% if activity.activity_type == "wrote_statement" %>
-		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link]  %> wrote about <%= activity.data[:friend_name] %></span><br class="clear">
+	<% if activity.activity_type == "wrote_statement" %>
+		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link]  %> wrote about <%= link_to activity.data[:friend_name], activity.data[:friend_link]	 %></span><br class="clear">
 		<div class="connection">
 			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:content] %>
 		</div>
-		<% elsif activity.activity_type == "tagged"  %>
+	<% elsif activity.activity_type == "tagged"  %>
 		<span><%= link_to activity.data[:creator_name], activity.data[:creator_link] %> tagged <%= link_to activity.data[:friend_name], activity.data[:friend_link] %></span><br class="clear">
 		<div class="connection">
 			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
@@ -36,15 +36,15 @@
 		<div class="content">
 			<%= activity.data[:creator_name] %> tagged <%= activity.data[:friend_name] %>  as <strong><%= activity.data[:tag_name] %></strong>
 		</div>
-		<% elsif activity.activity_type == "gave_badge" %>
-		<span><%= link_to activity.data[:friend_name], activity.data[:friend_link] %> gave <%= link_to activity.data[:user_name], activity.data[:user_link] %> a card</span><br class="clear">
+	<% elsif activity.activity_type == "gave_badge" %>
+		<span><%= link_to activity.data[:friend_name], activity.data[:friend_permalink] %> gave <%= link_to activity.data[:user_name], activity.data[:user_permalink] %> a card</span><br class="clear">
 		<div class="connection">
-			<%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>  => <%= link_to image_tag(activity.data[:user_thumb]), activity.data[:user_link] %>
+			<%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_permalink] %>  => <%= link_to image_tag(activity.data[:user_thumb]), activity.data[:user_permalink] %>
 		</div>
 		<div class="content">
 			<%= activity.data[:friend_name] %> says <%= activity.data[:user_name] %>  is his/her <%= activity.data[:badge_name] %> </strong>
 		</div>
-		<% elsif activity.activity_type == "took_badge" %>
+	<% elsif activity.activity_type == "took_badge" %>
 		<span><%= link_to activity.data[:friend_name], activity.data[:friend_link] %> took back a card from  <%= link_to activity.data[:user_name], activity.data[:user_link] %></span><br class="clear">
 		<div class="connection">
 			<%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %> => <%= link_to image_tag(activity.data[:user_thumb]), activity.data[:user_link] %>
@@ -52,16 +52,16 @@
 		<div class="content">
 			<%= activity.data[:user_name] %> says <%= activity.data[:user_name] %>  is no longer his/her <%= activity.data[:badge_name] %> </strong>
 		</div>
-		<% end %>
+	<% end %>
 		<br class="clear">
 	</div>
-	<% end %>
+<% end %>
 	<%= will_paginate @activities %>
 </div>
 
 
 
-<% if current_user.settings[:read_stream] == 0%>
+<% if read_stream? %>
 <script>
 	function call_perms() {
 		FB.Connect.showPermissionDialog("read_stream", function(perms) {

@@ -42,7 +42,6 @@
 			function user_not_connected(){
 				FB.Connect.requireSession();
 			}
-			var read_stream_status = <%= current_user.settings[:read_stream] %>;
 			var publish_stream_status = <%= current_user.settings[:publish_stream] %>;
 			var last_publish = "<%= current_user.settings[:last_publish] %>";
 			
