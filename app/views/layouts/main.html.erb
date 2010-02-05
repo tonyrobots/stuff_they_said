@@ -19,16 +19,16 @@
 		<%= init_fb_connect "XFBML", :js => :jquery %>
 		<% end %>
 		<div id="container">
-      		<%- flash.each do |name, msg| -%>
-        	<%= content_tag :div, msg, :id => "flash_#{name}" %>
-      		<%- end -%>
 			
 			<div id="header">
 				<div id="logo">
-					<%= link_to(image_tag('/images/sts_logo.gif'), home_path) %>
+					<%= link_to(image_tag('/images/logo1.png'), home_path) %>
 				</div>
 				<%= render :partial => "shared/nav" %>
 			</div>
+			<%- flash.each do |name, msg| -%>
+        	<%= content_tag :div, msg, :id => "flash_#{name}" %>
+      		<%- end -%>
      		<div id="main_wrap">
 	     		<%- if show_title? -%>
 	        	<h1><%=h yield(:title) %></h1>
@@ -42,6 +42,7 @@
 			function user_not_connected(){
 				FB.Connect.requireSession();
 			}
+			var read_stream_status = <%= current_user.settings[:read_stream] %>;
 			var publish_stream_status = <%= current_user.settings[:publish_stream] %>;
 			var last_publish = "<%= current_user.settings[:last_publish] %>";
 			
@@ -80,5 +81,11 @@
 			}
 		</script>
 		<% end %>
+			     <% if ENV["RAILS_ENV"] == "development" %>
+		 <div id="debug">
+		   <i>debugging info, only appears in development environment</i>
+	       <%= debug(params) %>
+		 </div>
+	     <% end %>
   	</body>
 </html>
