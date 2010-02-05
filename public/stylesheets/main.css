@@ -1,20 +1,21 @@
 /* Reset CSS
 ----------------------------*/
 p, form, ul, li {margin: 0; padding: 0; border: 0; font-size: 100%; background: transparent;}
-
-body { background-color: #e9e9e9; font-family: Verdana, Helvetica, Arial; font-size: 14px; }
+body { background-image: url(/images/bg_stripe.png); font-family:  Arial, Helvetica, sans-serif; 12pt; }
 a img {  border: none; }
-a { color: #0000FF; }
+a { color: #0D4A6F; font-weight: bold; }
 
 /* Body CSS
 ----------------------------*/
 
 #container { width: 960px; margin: 0 auto; background-color: #FFF; padding: 10px; border: solid 1px #ddd; margin-top: 20px; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
 
-h1 {font-size: 20px; font-weight: normal; color: #111;}
+h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Rounded MT Bold"}
 	h2 {margin: 0 0 10px 0; padding: 0; font-size: 18px; font-weight: normal; line-height: 2em; color: #2d3133; border-bottom: 1px solid #e9e9e9; text-shadow: #eee 0px 1px 1px;}
 		h3 {margin: 0 0 5px 0; font-size: 14px; font-weight: bold; color: #2d3133;}
-		
+
+
+
 #content { margin: 0 auto; text-align: center;}
 	h1.site { font-size: 24px; font-weight: bold; margin: 20px 0 5px 0;}
 	h2.site { font-size: 20px; font-weight: normal; margin: 0; border: 0;}
@@ -24,12 +25,13 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 	#search_box #search_form input { padding: 7px; background-color: #CFC; border: 1px solid #6C6; font-size: 16px;}
 	#notice { margin: 10px; padding: 10px; background: #6C6;}
 	
-	#header { min-height: 50px; border-bottom: 1px solid #ccc; padding: 5px;}
-		#header #logo { float: left; height: 20px;}
-		ul#user_nav {margin: 0; padding: 0; float: right; font-size: 13px;}
+	#header { min-height: 100px; padding: 5px; background-color: #15a4fe; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
+		#header a {font-weight: bold; color: #FFF}
+		#header #logo { float: left; height: 20px; }
+		ul#user_nav {margin: 0; padding: 0; float: right; font-size: 13px; }
 		#user_nav li { display: inline; padding: 5px; } 
 		#user_nav form { display: inline;}
-		#user_nav input { border: 1px solid #ccc; padding: 2px; }
+		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
 		#user_info img { }
@@ -47,13 +49,15 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
-		#write_statement { width: 680px; margin: 10px 0; padding: 10px; background-color: #CFC; border: 1px solid #6C6;}
+		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #CFC; border: 1px solid #6C6;}
 		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #6C6; line-height: 1.6em; font-size: 16px;} 
 		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
+		#statement_block { background-color: #CCC;  border:#999 1px solid; width: 600px; position: relative; left: 70px;}		
+		#thumbnail {float:left; background: url(/images/bubble_tip.png) no-repeat right;}
 		
 		.read_statement { padding: 10px; width: 680px; margin: 10px; border-bottom: 1px dotted #222;}
 		.read_statement p.question { font-size: 13px; line-height: 1.4em; padding: 5px 0;}
-		.read_statement p.content { font-size: 18px; line-height: 2em;  }
+		.read_statement p.content { font-size: 18px; }
 		.read_statement .byline_wrap {float: right; }
 		.byline_wrap .byline { font-style: italic; color: #333;}
 		.byline_wrap .actions { margin: 0 5px; position: relative;}
@@ -69,16 +73,15 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.actions a { margin: 0 2px;}
 		
 		#describe_friend { margin: 10px; }
-		#describe_friend .user_img { margin: 0 10px; }
-		.user_img img { max-width: 150px; }
+		#describe_friend .user_img { margin: 0 10px;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
-		#describe_friend .input_box textarea { margin: 10px; min-width: 650px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
 
 		#notifications { margin: 10px 5px; padding: 10px; background-color: #6C6; font-size: 16px;}
 		
-		ul#search_nav { margin: 20px 0;  padding: 8px 0; border-bottom: 4px solid #6C6;}
-		ul#search_nav li { display: inline; padding: 10px;}
-		ul#search_nav li.selected { background: #6C6;}
+		ul#search_nav { margin: 20px 0;  padding: 8px 0; border-bottom: 4px solid #15A4FE;}
+		ul#search_nav li { display: inline; padding: 10px; color: #FFF; font-weight: bold;}
+		ul#search_nav li.selected { background: #15A4FE;}
 		
 		.search_item { margin: 10px 0; padding: 5px;}
 		.search_item img { margin: 0 10px; float: left;}
@@ -105,7 +108,7 @@ h1 {font-size: 20px; font-weight: normal; color: #111;}
 		.activity_item .content { float: left; margin: 10px 10px 10px 30px;}
 /*Rails Errors
 ----------------------------*/
-#flash_notice, #flash_error { position: absolute; top: 0; padding: 5px 8px; margin: 0; width: 700px; }
+#flash_notice, #flash_error { padding: 5px 8px; margin: 5px auto; }
 #flash_notice {background-color: #CFC; border: solid 1px #6C6; }
 #flash_error { background-color: #FCC; border: solid 1px #C66; }
 .fieldWithErrors { display: inline; }

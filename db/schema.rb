@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
   add_index "activities", ["creator_id", "friend_id", "activity_type", "activity_id"], :name => "unique_activity", :unique => true
 
   create_table "badgeings", :force => true do |t|
@@ -40,30 +41,23 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
   end
 
   create_table "friendships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "user_id"
+    t.integer "friend_id"
   end
 
-  create_table "scores", :force => true do |t|
-    t.integer  "score"
-    t.integer  "scorable_id"
-    t.string   "scorable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "statements", :force => true do |t|
     t.string   "question"
     t.text     "content"
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.integer  "score",      :default => 0
     t.string   "by"
     t.string   "by_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",      :default => 0
     t.text     "vote_data"
   end
 
@@ -116,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type", :default => "",    :null => false
+    t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"
@@ -133,9 +127,9 @@ ActiveRecord::Schema.define(:version => 20100120064109) do
     t.integer  "user_id"
     t.integer  "friend_id"
     t.string   "by"
+    t.string   "by_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "by_link"
   end
 
 end
