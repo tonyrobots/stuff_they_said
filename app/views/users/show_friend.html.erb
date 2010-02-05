@@ -61,6 +61,24 @@
 				}
 			</script>
 		</div> -->
+		<script>
+				$("#tag_link").click(function () {
+				  $("#tag_form").toggle();
+				});
+				// $(".give_card").colorbox({width:"400px", inline:true, href:"#card_frame"});
+				function load_box(){
+					$('#card_frame').show();
+					$.fn.colorbox({
+						width: '500px',
+						inline: true,
+						href: '#card_frame',
+						open: true,
+						onCleanup: function(){
+							$('#card_frame').hide();
+						}
+					});
+				}
+		</script>
 		<div id="user_statements">
 			<%= render :partial => "shared/write_statement", :locals => { :user_id => @user.id, :user_name => @user.name } %>
 			<%= render :partial => "shared/read_statement", :collection => @user.statements, :as => :statement, :locals => { :moderate => false, :vote => true } %>
