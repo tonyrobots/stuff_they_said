@@ -1,19 +1,26 @@
 class UsersController < ApplicationController
   # before_filter :store_location
 
+  
   def show
     @user = User.find_by_permalink params[:title], :include => [:statements, :tags, :badgeings]
     @whois = Whois.find @user.current_whois unless @user.current_whois == 0
-    if current_user && current_user.permalink == params[:title]
+    if @user.privacy == 0
+      render "show_private"
+    elsif current_user && current_user.permalink == params[:title]
       @badges = Badge.badges_left @user
       render  "show_me"
-    elsif current_user && User.are_friends?(current_user, @user, facebook_session)
+    elsif  current_user && User.are_friends?(current_user, @user, facebook_session) 
       @whois = Whois.new if @user.current_whois == 0
       render "show_friend"
-    else
+    elsif @user.privacy == 2
       render "show_public"
+    else 
+      render "show_private"
     end
   end
+  
+  
   
   def check_user
     user = User.find_by_facebook_uid params[:fbuid]
@@ -25,6 +32,22 @@ class UsersController < ApplicationController
     end
     redirect_to "/#{user.permalink}"
   end
+
+
+
+  # this is used for user-defined settings, e.g. privacy and email
+  def settings
+    @user = current_user
+    if request.post? and params[:user]   
+      # running endless select loop, must fix
+      @user.update_attribute(:privacy, params[:user][:privacy].to_i)
+      @user.update_attribute(:email, params[:user][:email])
+      #current_user.save(false)
+      flash[:notice] = "Settings updated."
+      redirect_to user_page_path(current_user.permalink)
+    end
+  end
+
 
 
   def update

@@ -3,13 +3,12 @@
 <li>
 	<%= link_to current_user.name, user_page_path(current_user.permalink)%>
 </li>
-<li>
-	<%= fb_logout_link "Sign Out", "/logout", :js => :jquery %>
-</li>
+<li> <%= link_to "Privacy & Settings", "/settings" %> </li>
+<li> <%= fb_logout_link "Sign Out", "/logout", :js => :jquery %> </li>
 <% else %>
-<li><%= link_to "Sign In", "#", :onclick => "FB.Connect.requireSession(function() { connect_to_facebook(); });" %></li>
+<li><%= link_to "Sign In", "#", :onclick => "FB.Connect.requireSession(function() { connect_to_facebook(); });" %> </li>
 <% end %>
-| <li>
+<li>
 	<form id='search_form' action="javascript:search_form();">
     <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
 </form>

@@ -1,0 +1,15 @@
+<% title "Privacy and Settings", false %>
+
+<% form_for :user do |f| %>
+
+Privacy level: 
+
+<p><%= radio_button("user", "privacy", "0") %> DISABLE MY PROFILE -- Your profile will be hidden to everyone, including you. You will be able to access this settings & privacy page to change this option later. </p>
+<p><%= radio_button("user", "privacy", "1") %> FRIENDS ONLY -- Your profile will only be viewable (and editable) by your friends.</p>
+<p><%= radio_button("user", "privacy", "2") %> PUBLIC -- Your profile is viewable by everyone, but still only editable by your friends.</p>
+
+<p>	
+Email: <%= f.text_field :email %> <br />
+</p>
+<%= f.submit %>
+<% end %>

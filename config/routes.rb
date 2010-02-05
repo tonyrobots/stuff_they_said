@@ -8,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session, :users
   map.home "/home", :controller => "home", :action => "home"
   map.welcome "/welcome", :controller => "home", :action => "welcome"
+  map.settings "/settings", :controller => "users", :action => "settings"
+
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
   map.everyone_tag "/tag/everyone/:tag", :controller => "tags", :action => "everyone"
