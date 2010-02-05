@@ -1,9 +1,15 @@
 <div id="read_statement<%= statement.id %>" class="read_statement">
+	<div id="thumbnail">
+		<%= userThumb(statement.friend_id) %>
+	</div>
+	
+	<div id="statement_block">
 	<p id="question<%= statement.id %>" class="question">
-		<%= statement.question %>
+		<i><%= statement.question %></i>
 	</p>
+
 	<p id="content<%= statement.id %>" class="content">
-		<%= statement.content %>
+		"<%= statement.content %>"
 	</p>
 	<div class="byline_wrap">
 		<div id="byline<%= statement.id %>" class="byline left">
@@ -34,16 +40,18 @@
 				</div>
 			</div>
 			<% if statement.vote_data[:dislikers].include?(user) %>
-			<span id="dislike-<%= statement.id %>" class="voted left">Dilike</span>
+
+			<span id="dislike-<%= statement.id %>" class="voted left">Dislike</span>
 			<% else %>
 			<span id="dislike-<%= statement.id %>" class="left"><%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %></span>
 			<% end %>
 		<% end %>
 			<% if moderate %>
 			<%= link_to "Respond", "/#{statement.by_link}" %>
-			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete, :confirm => "About to delete statement. Are you sure?" %>
+			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
 			<% end %>
 		</div>
+	</div>
 	</div>
 	<br class="clear">
 </div>

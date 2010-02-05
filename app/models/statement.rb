@@ -1,5 +1,5 @@
 class Statement < ActiveRecord::Base
-  attr_accessible :vote_data, :by, :user_id, :content, :by_link, :friend_id
+  attr_accessible :vote_data, :by, :user_id, :content, :by_link, :friend_id, :question
   acts_as_voteable
   serialize :vote_data
   before_create :initialize_vote_data, :sanit 

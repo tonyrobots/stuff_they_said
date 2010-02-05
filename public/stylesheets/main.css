@@ -22,10 +22,10 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 	#welcome_login { margin: 40px auto; padding: 15px 20px; font-size: 18px; line-height: 1.8em; font-weight: bold; width: 250px; background: #CFC;  border: 1px solid green; -webkit-border-radius: 20px; -moz-border-radius: 20px;}
 	#welcome_login:hover { cursor: pointer;}
 	#search_box { margin: 20px auto; padding: 20px;  width: 400px;}
-	#search_box #search_form input { padding: 7px; background-color: #CFC; border: 1px solid #6C6; font-size: 16px;}
-	#notice { margin: 10px; padding: 10px; background: #6C6;}
+	#search_box #search_form input { padding: 7px; background-color: #CFC; border: 1px solid #689; font-size: 16px;}
+	#notice { margin: 10px; padding: 10px; background: #689;}
 	
-	#header { min-height: 100px; padding: 5px; background-color: #15a4fe; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
+	#header { min-height: 100px; padding: 5px; background-color: #3984DA; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
 		#header a {font-weight: bold; color: #FFF}
 		#header #logo { float: left; height: 20px; }
 		ul#user_nav {margin: 0; padding: 0; float: right; font-size: 13px; }
@@ -34,7 +34,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
-		#user_info img { }
+		#user_info img { border: 6px #000 }
 		#user_tags_wrap { margin: 10px 0;}
 		#user_tags li { display: inline; padding: 5px; line-height: 1.5em; }
 		.user_tagger li { display: inline; padding: 3px; font-size: 11px;}
@@ -43,21 +43,21 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 	#user_content {  width: auto; display: block; float: left;}
 		#user_whois { width: 700px;}
 		#user_whois fieldset { padding: 10px; border: 1px solid gray; background: #eee;}
-		#user_whois textarea { width: 600px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#user_whois textarea { width: 600px; height: 100px; border: 1px solid #689; background-color: #CEF; font-size: 13px; padding: 7px;}
 
 		#user_whois .content { font-size: 20px; line-height: 2em;}
 		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
-		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #CFC; border: 1px solid #6C6;}
-		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #6C6; line-height: 1.6em; font-size: 16px;} 
+		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #CEF; border: 1px solid #689;}
+		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
 		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
-		#statement_block { background-color: #CCC;  border:#999 1px solid; width: 600px; position: relative; left: 70px;}		
+		#statement_block { }		
 		#thumbnail {float:left; background: url(/images/bubble_tip.png) no-repeat right;}
 		
 		.read_statement { padding: 10px; width: 680px; margin: 10px; border-bottom: 1px dotted #222;}
-		.read_statement p.question { font-size: 13px; line-height: 1.4em; padding: 5px 0;}
-		.read_statement p.content { font-size: 18px; }
+		.read_statement p.question { font-size: 13px; line-height: 1.4em; position: relative; left: 70px;}
+		.read_statement p.content { font-size: 18px; background-color: #CCC; padding: 5px; border:#999 1px solid; width: 600px; position: relative; left: 70px; }
 		.read_statement .byline_wrap {float: right; }
 		.byline_wrap .byline { font-style: italic; color: #333;}
 		.byline_wrap .actions { margin: 0 5px; position: relative;}
@@ -75,13 +75,14 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#describe_friend { margin: 10px; }
 		#describe_friend .user_img { margin: 0 10px;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
-		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #6C6; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #689; background-color: #CFC; font-size: 13px; padding: 7px;}
 
-		#notifications { margin: 10px 5px; padding: 10px; background-color: #6C6; font-size: 16px;}
+		#notifications { margin: 10px 5px; padding: 10px; background-color: #3984DA; color: #fff; font-size: 16px;}
+		a#notifications {color: #fff}
 		
-		ul#search_nav { margin: 20px 0;  padding: 8px 0; border-bottom: 4px solid #15A4FE;}
+		ul#search_nav { margin: 20px 0;  padding: 8px 0; border-bottom: 4px solid #3984DA;}
 		ul#search_nav li { display: inline; padding: 10px; color: #FFF; font-weight: bold;}
-		ul#search_nav li.selected { background: #15A4FE;}
+		ul#search_nav li.selected { background: #3984DA;}
 		
 		.search_item { margin: 10px 0; padding: 5px;}
 		.search_item img { margin: 0 10px; float: left;}
@@ -89,10 +90,10 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		
 		#cards_wrap { width: 400px;}
 		#cards_wrap .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
-		#cards_wrap .card:hover { border: 1px solid #6C6; background-color: #CFC;}
+		#cards_wrap .card:hover { border: 1px solid #689; background-color: #CFC;}
 		#profile_cards_wrap .card { float: left; width: 75px;  min-height: 75px; margin: 2px; padding: 3px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #ddd;}
 		#cards_wrap_given .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
-		#cards_wrap_given .card:hover { border: 1px solid #6C6; background-color: #CFC;}
+		#cards_wrap_given .card:hover { border: 1px solid #689; background-color: #CFC;}
 
 		/* Tag Search */
 		.tag_rank { float: left;}
@@ -109,7 +110,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 /*Rails Errors
 ----------------------------*/
 #flash_notice, #flash_error { padding: 5px 8px; margin: 5px auto; }
-#flash_notice {background-color: #CFC; border: solid 1px #6C6; }
+#flash_notice {background-color: #CFC; border: solid 1px #689; }
 #flash_error { background-color: #FCC; border: solid 1px #C66; }
 .fieldWithErrors { display: inline; }
 

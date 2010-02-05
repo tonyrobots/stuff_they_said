@@ -1,14 +1,22 @@
 <div id="write_statement">
+<p><b><div id="question"><%=h @question %></div></b>
+<i><span id="right"><%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%></i></span>
+</p>
+
+<table><tr><td>
   <% remote_form_for :statement, :url => { :controller => "statements", :action => "create" }, :id => "statment_form" do |f| %>
 	    <%= f.hidden_field :user_id, :value => user_id %>
 	    <%= f.hidden_field :friend_id, :value => current_user.id %>
 	    <%= f.hidden_field :by, :value => current_user.name %>
+		<%= f.hidden_field :question, :value => @question %>
 	    <%= f.hidden_field :by_link, :value => current_user.permalink %>
-	    <%= f.text_area :content, :class => "content", :value => random_question(user_name) %><br class="clear">
-		<span class="right">
-		<%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%>
-		<%= f.submit "Say It" %>
+	    <%= f.text_area :content, :class => "content" %><br class="clear">
+</td><td>
+
+		<%= f.submit "Say It!" %>
+</td></tr>
+</table>
 		<br class="clear">
-		</span>
+		
 	<% end %>
 </div>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # before_filter :store_location
-
+include ApplicationHelper
   
   def show
     @user = User.find_by_permalink params[:title], :include => [:statements, :tags, :badgeings]
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       render  "show_me"
     elsif  current_user && User.are_friends?(current_user, @user, facebook_session) 
       @whois = Whois.new if @user.current_whois == 0
+      @question = random_question(@user.name)
       render "show_friend"
     elsif @user.privacy == 2
       render "show_public"

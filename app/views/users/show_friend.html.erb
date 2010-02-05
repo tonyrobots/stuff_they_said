@@ -26,11 +26,11 @@
 
 	<!-- Right User Content Column  -->
 	<div id="user_content">
-		<div id="user_whois">
-			<%= render :partial => "shared/write_whois", :locals => { :user => @user, :whois => @whois } %>
-			<% unless @user.current_whois == 0 %>
-			<%= render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => true, :change => false } %>
-			<% end %>
+		<!-- div id="user_whois">
+			<% #render :partial => "shared/write_whois", :locals => { :user => @user, :whois => @whois } %>
+			<% #unless @user.current_whois == 0 %>
+			<% #render :partial => "shared/read_whois", :locals => { :user => @user.name, :note => @whois, :edit => true, :change => false } %>
+			<% #end %>
 			<script>
 				<% if @user.current_whois != 0%>
 				$('#write_whois').hide();
@@ -59,7 +59,7 @@
 					});
 				}
 			</script>
-		</div>
+		</div> -->
 		<div id="user_statements">
 			<%= render :partial => "shared/write_statement", :locals => { :user_id => @user.id, :user_name => @user.name } %>
 			<%= render :partial => "shared/read_statement", :collection => @user.statements, :as => :statement, :locals => { :moderate => false, :vote => true } %>

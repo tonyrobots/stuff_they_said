@@ -2,9 +2,13 @@
 module ApplicationHelper
 
   def random_question(name)
-    APP_QUESTIONS[rand(APP_QUESTIONS.length)].gsub('X', name)
+    APP_QUESTIONS[rand(APP_QUESTIONS.length)].gsub('{name}', name)
   end
   
+  def userThumb(userid)
+    thumbnail = User.find(userid, :select => "image_thumb").image_thumb
+    image_tag thumbnail
+  end
 
   def publish_to_fb(page, to_user, action, action_link, message, message_link)
     if current_user.settings[:publish_stream] == 0
