@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100127214211) do
+ActiveRecord::Schema.define(:version => 20100205185200) do
 
   create_table "activities", :force => true do |t|
     t.integer  "creator_id"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20100127214211) do
     t.text     "badges_given"
     t.text     "settings"
     t.integer  "privacy",                           :default => 1
+    t.text     "twitter"
   end
 
   create_table "votes", :force => true do |t|

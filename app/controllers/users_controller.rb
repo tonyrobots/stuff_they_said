@@ -40,9 +40,9 @@ include ApplicationHelper
   def settings
     @user = current_user
     if request.post? and params[:user]   
-      # running endless select loop, must fix
       @user.update_attribute(:privacy, params[:user][:privacy].to_i)
       @user.update_attribute(:email, params[:user][:email])
+      @user.update_attribute(:twitter, params[:user][:twitter])
       #current_user.save(false)
       flash[:notice] = "Settings updated."
       redirect_to user_page_path(current_user.permalink)

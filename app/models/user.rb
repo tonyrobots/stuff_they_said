@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   acts_as_voter
   acts_as_tagger
   acts_as_taggable_on :tags  
-  attr_accessible :name, :login_count, :permalink, :current_whois, :image_thumb, :facebook_uid, :image_large, :image_small, :settings
+  attr_accessible :name, :login_count, :permalink, :current_whois, :image_thumb, :facebook_uid, :image_large, :image_small, :settings, :privacy, :twitter
   has_many :whoiss, :foreign_key => :user_id
   has_many :statements, :order => "created_at DESC"
   has_many :friendships
