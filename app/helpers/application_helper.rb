@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def random_question(name)
-    APP_QUESTIONS[rand(APP_QUESTIONS.length)].gsub('{name}', name)
+    APP_QUESTIONS[rand(APP_QUESTIONS.length)].to_s.gsub('{name}', name)
   end
   
   def userThumb(userid, link=0)
