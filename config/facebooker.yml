@@ -12,14 +12,14 @@ development:
   api_key: a5a810c4db6d7d636b4a94c1bf94f667
   secret_key: b6bdff8e6c705e6ce2bab5fdfebd0cf4
   canvas_page_name:
-  callback_url: http://mugasha.mine.nu:3000/
+  callback_url: http://tonyzito.homeip.net/
   pretty_errors: true
   set_asset_host_to_callback_url: false
   tunnel:
     public_host_username: 
     public_host: 
     public_port: 4007
-    local_port: 3000
+    local_port: 3001
     server_alive_interval: 0
 
 test:
