@@ -3,7 +3,7 @@
 default_run_options[:pty] = true
  
 set :application, "stufftheysaid"
-set :user, "tonyrobots"
+set :user, "tony"
 set :repository,  "git@github.com:tonyrobots/stuff_they_said.git"
 set :port, 30007
  
