@@ -53,12 +53,13 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
 		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
 		#statement_block { }		
-		#thumbnail {float:left; background: url(/images/bubble_tip.png) no-repeat right;}
+		
 		
 		.read_statement { padding: 10px; width: 680px; margin: 10px; border-bottom: 1px dotted #222;}
-		.read_statement p.question { font-size: 13px; line-height: 1.4em; position: relative; left: 70px;}
-		.read_statement p.content { font-size: 18px; background-color: #CCC; padding: 5px; border:#999 1px solid; width: 600px; position: relative; left: 70px; }
+		.read_statement p.question { font-size: 13px; line-height: 1.4em; position: relative; left: 70px; color: #444;}
+		.read_statement p.content { font-size: 18px; background-color: #CCC; padding: 5px; width: 600px; position: relative; left: 70px; }
 		.read_statement .byline_wrap {float: right; }
+		.read_statement .thumbnail {float:left; background: url(/images/bubble_tip.png) no-repeat right;}
 		.byline_wrap .byline { font-style: italic; color: #333;}
 		.byline_wrap .actions { margin: 0 5px; position: relative;}
 		.actions .score { padding: 0 5px; margin: 0 5px; border: 1px solid gray;}

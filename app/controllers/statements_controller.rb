@@ -58,7 +58,9 @@ class StatementsController < ApplicationController
   
   def change_question
     render :update do |page|
-      page.replace_html 'question', random_question(params[:name])
+      question = random_question(params[:name])
+      page.replace_html 'question', question
+      page['statement_question'].value = question
     end
   end
   
