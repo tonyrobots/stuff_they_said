@@ -74,9 +74,11 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.actions a { margin: 0 2px;}
 		
 		#describe_friend { margin: 10px; }
-		#describe_friend .user_img { margin: 0 10px;}
+		#describe_friend .user_img { margin: 0 10px; }
+		#describe_friend img {border: 6px solid #000;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
-		#describe_friend .input_box textarea { margin: 10px; min-width: 500px; height: 100px; border: 1px solid #689; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#describe_friend .input_box { margin: 20px; float: left; font-weight: bold; }
+		#describe_friend .input_box textarea { min-width: 500px; height: 100px; border: 1px solid #689; background-color: #CFC; font-size: 13px; padding: 7px;}
 
 		#notifications { margin: 10px 5px; padding: 10px; background-color: #3984DA; color: #fff; font-size: 16px;}
 		a#notifications {color: #fff}

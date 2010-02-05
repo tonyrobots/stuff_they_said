@@ -2,12 +2,12 @@
 	<h2>
 		Write about <strong><%= fb_name fb_user, :linked => false %>:</strong>
 	</h2>
-	<div class="user_img left">		
+	<span class="user_img left">		
 		<%= fb_profile_pic fb_user, :size => :normal %>
-	</div>
+	</span>
 	<div class="input_box">
-	<div id="question"><%= @question %></div>
-	  <% form_for :statement, :url => { :controller => "statements", :action => "describe_friend" }, :id => "statment_form" do |f| %>
+	<div id="question"> <p><%= @question %></p></div>
+	  <% form_for :statement, :url => { :controller => "statements", :action => "describe_friend" }, :id => "statement_form" do |f| %>
 	    <%= f.hidden_field :friend_id, :value => current_user.id %>
 	    <%= f.hidden_field :by, :value => current_user.name %>
 	    <%= f.hidden_field :by_link, :value => current_user.permalink %>

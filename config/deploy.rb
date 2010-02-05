@@ -10,11 +10,11 @@ set :port, 30007
 set :runner, "tony"
 set :use_sudo, false
  
-set :deploy_to, "/www/#{application}"
+set :deploy_to, "/www/sts/"
  
  
 set :scm, "git"
-set :scm_passphrase, "33sh33d" 
+set :scm_passphrase, "coffee" 
  
 set :branch, "master"
  
