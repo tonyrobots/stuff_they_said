@@ -12,7 +12,7 @@ include ApplicationHelper
       render  "show_me"
     elsif  current_user && User.are_friends?(current_user, @user, facebook_session) 
       @whois = Whois.new if @user.current_whois == 0
-      @question = random_question(@user.name)
+      @question = random_question(firstName(@user.name))
       render "show_friend"
     elsif @user.privacy == 2
       render "show_public"

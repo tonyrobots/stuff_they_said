@@ -26,6 +26,7 @@
 			<%= link_to image_tag(activity.data[:creator_thumb]), activity.data[:creator_link] %> => <%= link_to image_tag(activity.data[:friend_thumb]), activity.data[:friend_link] %>
 		</div>
 		<div class="content">
+			<p class="question"><%= activity.data[:question] %></p>
 			<%= activity.data[:content] %>
 		</div>
 	<% elsif activity.activity_type == "tagged"  %>

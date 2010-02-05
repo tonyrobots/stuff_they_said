@@ -17,7 +17,8 @@ class Activity < ActiveRecord::Base
       :friend_name => user.name, 
       :friend_link => user.permalink, 
       :friend_thumb => user.image_thumb,      
-      :content => statement.content
+      :content => statement.content,
+      :question => statement.question
     }
     begin
       create(

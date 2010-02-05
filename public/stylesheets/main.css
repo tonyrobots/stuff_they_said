@@ -34,7 +34,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
-		#user_info img { border: 6px #000 }
+		#user_info img { border: 6px solid #000; }
 		#user_tags_wrap { margin: 10px 0;}
 		#user_tags li { display: inline; padding: 5px; line-height: 1.5em; }
 		.user_tagger li { display: inline; padding: 3px; font-size: 11px;}
@@ -49,7 +49,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
-		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #CEF; border: 1px solid #689;}
+		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #c4e2f0; border: 1px solid #689;}
 		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
 		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
 		#statement_block { }		
@@ -108,6 +108,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.activity_item span { margin: 0 10px;}
 		.activity_item .connection { float: left; margin: 10px; }
 		.activity_item .content { float: left; margin: 10px 10px 10px 30px;}
+		.activity_item p.question { font-size: 13px; font-style:italic; color: #444;}
 /*Rails Errors
 ----------------------------*/
 #flash_notice, #flash_error { padding: 5px 8px; margin: 5px auto; }

@@ -6,12 +6,13 @@
 	<div id="user_info">
 		<%= image_tag @user.image_large unless @user.image_thumb.nil? %>
 		<div id="user_tags_wrap">
+			<strong><%= firstName(@user.name) %> is:</strong>
 			<ul id="user_tags">
 				<% for tag in @user.tags.uniq %>
 				<li><%= link_to tag.name, tag_path(tag.name) %></li>
 				<% end %>
 			</ul>
-			<%= link_to "+Tag", "#", :id => "tag_link", :class => "right" %>
+			<%= link_to "add a tag", "#", :id => "tag_link", :class => "right" %>
 			<br class="clear">
 			<%= render :partial => "shared/tag_friend", :locals => { :user_id => @user.id } %>
 		</div>

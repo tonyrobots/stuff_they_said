@@ -2,23 +2,23 @@
 
 default_run_options[:pty] = true
  
-set :application, "aboutme"
-set :user, "dodeja"
-set :repository,  "git@github.com:dodeja/aboutme.git"
+set :application, "stufftheysaid"
+set :user, "tonyrobots"
+set :repository,  "git@github.com:tonyrobots/stuff_they_said.git"
 set :port, 30007
  
-set :runner, "dodeja"
+set :runner, "tony"
 set :use_sudo, false
  
-set :deploy_to, "/home/dodeja/www/#{application}"
+set :deploy_to, "/www/#{application}"
  
  
 set :scm, "git"
-set :scm_passphrase, "a317dmx" 
+set :scm_passphrase, "33sh33d" 
  
 set :branch, "master"
  
- set :shared_host, "204.232.206.167"
+set :shared_host, "204.232.206.167"
 set :location, "204.232.206.167"
  
 role :app, location

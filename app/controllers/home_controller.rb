@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   layout 'home'
   before_filter :require_user, :only => [:welcome, :home]
   before_filter :require_no_user, :only => :root
+  include ApplicationHelper
+  
   def root
     
   end
@@ -11,7 +13,8 @@ class HomeController < ApplicationController
   end
 
   def home
-    @dtype = rand(2)  
+    #@dtype = rand(2)  
+    @dtype = 0
     if read_stream? 
       @random_user = User.random_fb_friend(facebook_session)
     else
@@ -19,6 +22,7 @@ class HomeController < ApplicationController
     end
     if @dtype == 0
       @new_fb_user = facebook_session.fql_query("SELECT name,pic FROM user WHERE uid=#{@random_user}").first
+      @question = random_question(firstName(@new_fb_user.name))
     end
     if current_user.login_count == 1
       @random_user = facebook_session.user.friends[rand(facebook_session.user.friends.length)]    

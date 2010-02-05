@@ -1,6 +1,6 @@
 <div id="write_statement">
-<p><b><div id="question"><%=h @question %></div></b>
-<i><span id="right"><%= link_to_remote "Change question", :url => { :controller => "statements", :action => "change_question", :name => user_name }, :method => :post%></i></span>
+<p><%= link_to_remote "<img src='/images/refresh.png' border=0 align='left'>", :url => { :controller => "statements", :action => "change_question", :name => firstName(user_name) }, :method => :post%>
+	<b><div id="question"><%=h @question %></div></b>
 </p>
 
 <table><tr><td>
