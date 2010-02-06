@@ -28,3 +28,5 @@ config.log_level = :warn
 
 # Enable threaded mode
 # config.threadsafe!
+
+APPLICATION_URL = "http://www.stufftheysaid.com/"

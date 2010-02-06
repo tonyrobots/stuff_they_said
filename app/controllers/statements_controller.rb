@@ -13,14 +13,15 @@ class StatementsController < ApplicationController
   
   def create
     @statement = Statement.new(params[:statement])
-    user = User.find params[:statement][:user_id], :select => "facebook_uid, name"
-    message = @statement.content.gsub(/'/, "")
+    user = User.find params[:statement][:user_id], :select => "facebook_uid, name, permalink"
+    message = @statement.question + " " + @statement.content.gsub(/'/, "")
     if @statement.save
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
         page["statement_content"].value = ""
         @question = random_question(firstName(user.name))
-        publish_to_fb(page, user, "Users Page", "http://user_page_link", message, "http://user_page_link")
+        #publish_to_fb(page, user, firstName(@statement.by) + "'s Stuff they Said profile", APPLICATION_URL + @statement.by_link, message, APPLICATION_URL)
+        publish_to_fb(page, user, "Stuff They Said", APPLICATION_URL, message, APPLICATION_URL + user.permalink)
       end
     end
   end  
