@@ -10,7 +10,7 @@
  </head>
   <body>
 	<%= init_fb_connect "XFBML", :js => :jquery %>
-   <div id="container">
+   <div id="container<%= @root %>">
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>

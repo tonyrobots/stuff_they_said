@@ -9,6 +9,7 @@ a { color: #0D4A6F; font-weight: bold; }
 ----------------------------*/
 
 #container { width: 960px; margin: 0 auto; background-color: #FFF; padding: 10px; border: solid 1px #ddd; margin-top: 20px; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
+#containerroot { width: 960px; margin: 0 auto; background-color: #3984da; padding: 10px; border: solid 1px #0e233c; margin-top: 20px; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
 
 h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Rounded MT Bold"}
 	h2 {margin: 0 0 10px 0; padding: 0; font-size: 18px; font-weight: normal; line-height: 2em; color: #2d3133; border-bottom: 1px solid #e9e9e9; text-shadow: #eee 0px 1px 1px;}
@@ -19,10 +20,10 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 #content { margin: 0 auto; text-align: center;}
 	h1.site { font-size: 24px; font-weight: bold; margin: 20px 0 5px 0;}
 	h2.site { font-size: 20px; font-weight: normal; margin: 0; border: 0;}
-	#welcome_login { margin: 40px auto; padding: 15px 20px; font-size: 18px; line-height: 1.8em; font-weight: bold; width: 250px; background: #CFC;  border: 1px solid green; -webkit-border-radius: 20px; -moz-border-radius: 20px;}
+	#welcome_login { margin: 40px auto; padding: 15px 20px; font-size: 18px; line-height: 1.8em; font-weight: bold; width: 250px; background: #FFF; color: #0e233c; border: 1px solid #0e233c; -webkit-border-radius: 20px; -moz-border-radius: 20px;}
 	#welcome_login:hover { cursor: pointer;}
-	#search_box { margin: 20px auto; padding: 20px;  width: 400px;}
-	#search_box #search_form input { padding: 7px; background-color: #CFC; border: 1px solid #689; font-size: 16px;}
+	#search_box { margin: 20px auto; padding: 20px;  width: 400px; color: #fff}
+	#search_box #search_form input { padding: 7px; margin: 6px; background-color: #CCC; border: 1px solid #0e233c; font-size: 16px;}
 	#notice { margin: 10px; padding: 10px; background: #689;}
 	
 	#header { min-height: 100px; padding: 5px; background-color: #3984DA; -webkit-border-radius: 10px; -moz-border-radius: 10px;}

@@ -1,15 +1,18 @@
-<% title "Hello", false %>
+<% title "Welcome!", false %>
+<div id = "home_wrap">
 <div id="content">
-	<h1 class="site"> <%= image_tag "/images/sts_logo.gif" %></h1>
-	<h2 class="site"> (about you)</h2>
+	<h1 class="site"> <%= image_tag "/images/sts_home.png" %></h1>
+
 
 	<div id="welcome_login" onClick="FB.Connect.requireSession(function() { connect_to_facebook(); });">
 		See What Your Friends Are Saying About You!
 	</div>
 	<div id="welcome_blurb">
-		You will be asked to identify yourself through your Facebook Account
+    	<%= image_tag "/images/threecees_anim.gif" %>	
 	</div>
+	
 	<div id="search_box">
+		...or if you want, search for your friends and see what people have been saying about <i>them</i>!
 		<form id='search_form' action="javascript:search_form();">
 		    <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
 			<%= submit_tag  "Search" %>
@@ -27,4 +30,5 @@
 		else window.location.href = '/search/'+$('#search').val();
 	}
 	</script>
+</div>
 </div>

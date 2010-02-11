@@ -5,7 +5,8 @@ class HomeController < ApplicationController
   include ApplicationHelper
   
   def root
-    
+    #render :layout => 'default' 
+    @root = "root"
   end
   
   def welcome
