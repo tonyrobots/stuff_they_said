@@ -8,11 +8,11 @@
 		See What Your Friends Are Saying About You!
 	</div>
 	<div id="welcome_blurb">
-    	<%= image_tag "/images/threecees_anim.gif" %>	
+    	<%= image_tag "/images/threecees_anim2.gif" %>	
 	</div>
 	
 	<div id="search_box">
-		...or if you want, search for your friends and see what people have been saying about <i>them</i>!
+		Or if you want, search for your friends and see what people have been saying about <i>them</i>!
 		<form id='search_form' action="javascript:search_form();">
 		    <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
 			<%= submit_tag  "Search" %>

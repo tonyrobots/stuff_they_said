@@ -21,7 +21,8 @@ class BadgesController < ApplicationController
   end
 
   def show
-    if current_user.badges_given.nil?
+#    Rails.logger.info "badges given:" + current_user.badges_given
+    if current_user.badges_given.nil? or  current_user.badges_given.length == 0
       cards = Badge.all :conditions => ["giveable = ?", true]
     else
       cards = Badge.all :conditions => ["giveable = ? and id NOT IN (?)", true, current_user.badges_given]

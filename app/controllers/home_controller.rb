@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   before_filter :require_user, :only => [:welcome, :home]
   before_filter :require_no_user, :only => :root
   include ApplicationHelper
+  #rescue_from Facebooker::Session::SessionExpired, :with => :root
+
   
   def root
     #render :layout => 'default' 

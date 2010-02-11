@@ -1,3 +1,5 @@
 <div id="card_<%= card.id %>" class="card rounded-5">
-	<%= card.data[:badge_name] %> by <%= link_to card.data[:friend_name], user_page_path(card.data[:friend_permalink]) %>
+	<%= image_tag "cards/card.gif" %>
+	<b><%= card.data[:badge_name] %></b>
+	<br /> from <br /> <%= link_to card.data[:friend_name], user_page_path(card.data[:friend_permalink]) %>
 </div>

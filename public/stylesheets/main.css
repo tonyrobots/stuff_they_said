@@ -92,11 +92,11 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.search_item img { margin: 0 10px; float: left;}
 		.search_item_info { float: left;}
 		
-		#cards_wrap { width: 400px;}
-		#cards_wrap .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
+		#cards_wrap { width: 450px;}
+		#cards_wrap .card { float: left; width: 75px; height: 125px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 0px solid #fff; }
 		#cards_wrap .card:hover { border: 1px solid #689; background-color: #CFC;}
-		#profile_cards_wrap .card { float: left; width: 75px;  min-height: 75px; margin: 2px; padding: 3px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #ddd;}
-		#cards_wrap_given .card { float: left; width: 75px; height: 50px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
+		#profile_cards_wrap .card { float: left; width: 75px;  min-height: 125px; margin: 2px; padding: 3px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #ddd;}
+		#cards_wrap_given .card { float: left; width: 75px; height: 200px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
 		#cards_wrap_given .card:hover { border: 1px solid #689; background-color: #CFC;}
 
 		/* Tag Search */

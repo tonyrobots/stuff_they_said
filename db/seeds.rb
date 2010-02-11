@@ -4,4 +4,20 @@
 # Examples:
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
+#   Mayor.create(:name => 'Daley', :city => cities.first)
+
+
+ActiveRecord::Base.connection.execute("Delete from badges")
+cards = Badge.create([
+  { :name=> 'BFF', :image_thumb=> 'card.gif'},
+  { :name => 'Smartest', :image_thumb=> 'card.gif' },
+  { :name => 'Hottest', :image_thumb=> 'card.gif' },
+  { :name => 'Funniest', :image_thumb=> 'card.gif' },
+  { :name => 'Most Eligible', :image_thumb=> 'card.gif' },
+  { :name => 'Most Saintly', :image_thumb=> 'card.gif' },
+  { :name => 'Naughtiest', :image_thumb=> 'card.gif' },
+  { :name => 'Hardest Working', :image_thumb=> 'card.gif' },
+  { :name => 'Call Me', :image_thumb=> 'card.gif' },
+  { :name => 'WTF?', :image_thumb=> 'card.gif' }
+  
+])
