@@ -3,9 +3,12 @@
 	<% for card in cards %>
 	<div id="card_<%= card.id %>" class="card">
 		<% if user.to_i == friend.to_i %>
-		<%= image_tag "cards/card.gif" %><br /><%= card.name %>
+		<%= image_tag  "cards/" + card.image_thumb %>
+		<br /><%= card.name %>
 		<% else %>
-		<%= image_tag "cards/card.gif" %><br /><%= link_to_remote card.name,  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, 
+		<%= link_to_remote (image_tag  "cards/" + card.image_thumb),  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, :method => :post %>
+		<br />
+		<%= link_to_remote card.name,  :url => { :controller => "badges", :action => "create", :id => card.id, :user_id => user, :friend_id => friend }, 
 		:method => :post %>
 		<% end %>
 	</div>
@@ -19,7 +22,7 @@
 <div id="cards_wrap_given">	
 	<% for card in cards_given %>
 	<div id="card_<%= card.badge.id %>" class="card">
-		<%= image_tag "cards/card.gif" %><br /><%= card.badge.name %><br />
+		<%= image_tag "cards/" + card.badge.image_thumb %><br /><%= card.badge.name %><br />
 		given to <%= link_to card.data[:user_name], '/'+ card.data[:user_permalink] %>
 		<%= link_to_remote "Revoke",  :url => { :controller => "badges", :action => "destroy", :id => card.id, :badge_id => card.badge.id }, 
 		:method => :delete %>
