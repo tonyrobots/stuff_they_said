@@ -4,7 +4,9 @@
 
 	<!-- Left User Info Column  -->
 	<div id="user_info">
+		<div id = "user_pic">
 		<%= image_tag @user.image_large unless @user.image_thumb.nil? %>
+		</div>
 		<div id="user_tags_wrap">
 			<strong><%= firstName(@user.name) %> is:</strong>
 			<ul id="user_tags">

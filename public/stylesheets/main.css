@@ -35,7 +35,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
-		#user_info img { border: 6px solid #000; }
+		#user_pic img { border: 6px solid #000; }
 		#user_tags_wrap { margin: 10px 0;}
 		#user_tags li { display: inline; padding: 5px; line-height: 1.5em; }
 		.user_tagger li { display: inline; padding: 3px; font-size: 11px;}

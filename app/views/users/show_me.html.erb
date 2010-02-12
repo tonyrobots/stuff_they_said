@@ -4,7 +4,9 @@
 
 	<!-- Left User Info Column  -->
 	<div id="user_info">
+		<div id="user_pic">
 		<%= image_tag @user.image_large %>
+		</div>
 		<div id="user_tags_wrap">
 			<ul id="user_tags">
 				<% for tag in @user.tags.uniq %>
