@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   layout 'main'
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   helper_method :facebook_session, :current_user_session, :current_user, :set_facebook_session, :read_stream?
+  filter_parameter_logging :fb_sig_friends
 
   unless ActionController::Base.consider_all_requests_local
     rescue_from Exception,                            :with => :render_error

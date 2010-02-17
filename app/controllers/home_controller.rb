@@ -3,12 +3,17 @@ class HomeController < ApplicationController
   before_filter :require_user, :only => [:welcome, :home]
   before_filter :require_no_user, :only => :root
   include ApplicationHelper
-  #rescue_from Facebooker::Session::SessionExpired, :with => :root
+  rescue_from Facebooker::Session::SessionExpired, :with => :logout
 
   
   def root
     #render :layout => 'default' 
     @root = "root"
+  end
+  
+  def logout
+    current_user_session.destroy
+    redirect_back_or_default root_url
   end
   
   def welcome

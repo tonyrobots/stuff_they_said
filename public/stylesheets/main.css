@@ -5,6 +5,8 @@ body { background-image: url(/images/bg_stripe.png); font-family:  Arial, Helvet
 a img {  border: none; }
 a { color: #0D4A6F; font-weight: bold; }
 
+
+
 /* Body CSS
 ----------------------------*/
 
@@ -22,7 +24,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 	h2.site { font-size: 20px; font-weight: normal; margin: 0; border: 0;}
 	#welcome_login { margin: 40px auto; padding: 15px 20px; font-size: 18px; line-height: 1.8em; font-weight: bold; width: 250px; background: #FFF; color: #0e233c; border: 1px solid #0e233c; -webkit-border-radius: 20px; -moz-border-radius: 20px;}
 	#welcome_login:hover { cursor: pointer;}
-	#search_box { margin: 20px auto; padding: 20px;  width: 400px; color: #fff}
+	#search_box { margin: 20px auto; padding: 20px;  width: 400px; color: #fff;}
 	#search_box #search_form input { padding: 7px; margin: 6px; background-color: #CCC; border: 1px solid #0e233c; font-size: 16px;}
 	#notice { margin: 10px; padding: 10px; background: #689;}
 	
@@ -33,6 +35,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_nav li { display: inline; padding: 5px; } 
 		#user_nav form { display: inline;}
 		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
+		#nav_search { float: right; position: relative; top: 50px; }
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
 		#user_pic img { border: 6px solid #000; }
@@ -99,6 +102,8 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#cards_wrap_given .card { float: left; width: 75px; height: 200px; margin: 2px; padding: 5px; text-align: center; font-size: 12px; cursor: pointer; border: 1px solid #fff; }
 		#cards_wrap_given .card:hover { border: 1px solid #689; background-color: #CFC;}
 
+		#privacy_table { padding: 15px; margin: 12px; vertical-align: top; }
+
 		/* Tag Search */
 		.tag_rank { float: left;}
 		.tag_vote ul { display: inline; margin: 0; padding: 0;}
@@ -112,6 +117,33 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.activity_item .connection { float: left; margin: 10px; }
 		.activity_item .content { float: left; margin: 10px 10px 10px 30px;}
 		.activity_item p.question { font-size: 13px; font-style:italic; color: #444;}
+		
+		/* Nice forms */
+			#inputArea
+			{
+			    font-family: Arial, Sans-Serif;
+			    font-size: 13px;
+			    background-color: #d6e5f4;
+			    padding: 10px;
+			}
+			
+			#inputArea input[type="text"], #inputArea textarea
+			{
+			    font-family: Arial, Sans-Serif;
+			    font-size: 13px;
+			    margin-bottom: 5px;
+			    display: block;
+			    padding: 4px;
+			    border: solid 1px #85b1de;
+			    width: 300px;
+			}
+			
+			#inputArea input[type="text"]:focus, #inputArea textarea:focus
+			{
+			    background-image: none;
+			    background-color: #ffffff;
+			    border: solid 1px #33677F;
+			}
 /*Rails Errors
 ----------------------------*/
 #flash_notice, #flash_error { padding: 5px 8px; margin: 5px auto; }

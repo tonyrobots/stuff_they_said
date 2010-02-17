@@ -1,18 +1,34 @@
 <% title "Privacy and Settings", false %>
 
+
+<h1>Privacy</h1>
+<div id="inputArea">
+<p>Your privacy is very important to us. By default, only your facebook friends can view your Stuff They Said profile. But we offer the following privacy options
+for those of you who want to finetune their exposure:</p>
+
 <% form_for :user do |f| %>
 
-Privacy level: 
+<table>
+	<tr>
+		<td width="34%" id="privacy_table"><p><%= radio_button("user", "privacy", "0") %> <%= f.label  :privacy, "DISABLE MY PROFILE", :value => 0 %></p>
+		<p>Your profile will be hidden to everyone, including you. You will be able to access this settings & privacy page to change this option later. </p></td>
+		<td width="33%" id="privacy_table"><p><%= radio_button("user", "privacy", "1") %>  <%=  f.label  :privacy,  "FRIENDS ONLY",  :value => 1 %></p>
+		<p>Your profile will only be viewable (and editable) by your friends.</p></td>
+		<td width="33%" id="privacy_table"><p><%= radio_button("user", "privacy", "2") %>  <%= f.label :privacy, "PUBLIC",  :value => 2 %></p>
+		<p>Your profile is viewable by everyone, but still only editable by your friends.</p></td>
+	</tr>
+</table>
+<%= f.submit %>
+</div>
 
-<p><%= radio_button("user", "privacy", "0") %> DISABLE MY PROFILE -- Your profile will be hidden to everyone, including you. You will be able to access this settings & privacy page to change this option later. </p>
-<p><%= radio_button("user", "privacy", "1") %> FRIENDS ONLY -- Your profile will only be viewable (and editable) by your friends.</p>
-<p><%= radio_button("user", "privacy", "2") %> PUBLIC -- Your profile is viewable by everyone, but still only editable by your friends.</p>
-
-<p>	
-Email: <%= f.text_field :email %> <br />
+<h1> Contact settings</h1>
+<div id="inputArea">
+<%= f.label :email, "E-mail address: " %><br /> <%= f.text_field :email %> <br />
 </p>
+
 <p>	
-Twitter name: <%= f.text_field :twitter %> <br />
+<%= f.label :twitter, "Twitter name: " %><br /><%= f.text_field :twitter %> <br />
 </p>
 <%= f.submit %>
+</div>
 <% end %>

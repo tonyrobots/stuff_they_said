@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session, :users
   map.home "/home", :controller => "home", :action => "home"
   map.welcome "/welcome", :controller => "home", :action => "welcome"
-  map.settings "/settings", :controller => "users", :action => "settings"
+  map.settings "/settings", :controller => "users", :action => "preferences"
 
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"

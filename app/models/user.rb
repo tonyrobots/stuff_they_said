@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def self.page_permalink(name)
-    page_token = "#{name.gsub(' ', '-')}"
+    page_token = "#{name.gsub(/\W/, '-')}"
     page = User.find_by_permalink page_token
     if page.nil? 
       return page_token

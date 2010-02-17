@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # before_filter :store_location
 include ApplicationHelper
+before_filter :require_user, :only => [:preferences]
   
   def show
     @user = User.find_by_permalink params[:title], :include => [:statements, :tags, :badgeings]
@@ -36,19 +37,20 @@ include ApplicationHelper
 
 
 
-  # this is used for user-defined settings, e.g. privacy and email
-  def settings
+  # this is used for user-defined prefences, e.g. privacy and email
+  def preferences
     @user = current_user
     if request.post? and params[:user]   
       @user.update_attribute(:privacy, params[:user][:privacy].to_i)
       @user.update_attribute(:email, params[:user][:email])
       @user.update_attribute(:twitter, params[:user][:twitter])
       #current_user.save(false)
-      flash[:notice] = "Settings updated."
+      flash[:notice] = "Preferences & settings updated."
       redirect_to user_page_path(current_user.permalink)
+    else
+      render "settings"
     end
   end
-
 
 
   def update
