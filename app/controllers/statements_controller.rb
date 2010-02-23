@@ -20,7 +20,6 @@ class StatementsController < ApplicationController
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
         page["statement_content"].value = ""
         page["statement_fbpost"].value = "1"
-        self.change_question
         #@question = random_question(firstName(user.name))
         #was trying to make the question refresh upon posting,  but was getting tangled up with the objects not being available
         #page.replace_html "write_statement", :partial => "shared/write_statement", :locals => { :question => @question, :user_id => @user.id, :user_name => @user.name }
