@@ -19,9 +19,15 @@ class StatementsController < ApplicationController
       render :update do |page|
         page.insert_html :after, "write_statement", :partial => 'shared/read_statement', :locals => { :statement => @statement, :moderate => false, :vote => true }
         page["statement_content"].value = ""
-        @question = random_question(firstName(user.name))
+        page["statement_fbpost"].value = "1"
+        self.change_question
+        #@question = random_question(firstName(user.name))
+        #was trying to make the question refresh upon posting,  but was getting tangled up with the objects not being available
+        #page.replace_html "write_statement", :partial => "shared/write_statement", :locals => { :question => @question, :user_id => @user.id, :user_name => @user.name }
         #publish_to_fb(page, user, firstName(@statement.by) + "'s Stuff they Said profile", APPLICATION_URL + @statement.by_link, message, APPLICATION_URL)
-        publish_to_fb(page, user, "Stuff They Said", APPLICATION_URL, message, APPLICATION_URL + user.permalink)
+        if (params[:statement][:fbpost] == "1")
+          publish_to_fb(page, user, "Stuff They Said", APPLICATION_URL, message, APPLICATION_URL + user.permalink)
+        end
       end
     end
   end  

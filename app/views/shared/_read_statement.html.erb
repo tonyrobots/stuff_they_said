@@ -7,9 +7,14 @@
 	<p id="question<%= statement.id %>" class="question">
 		<i><%= statement.question %></i>
 	</p>
+	
+	
 
 	<p id="content<%= statement.id %>" class="content">
 		"<%= statement.content %>"
+	<% if moderate or (statement.by == current_user.name) %>
+	  <%= link_to_remote image_tag("icons/delete.png",:size => "20x20", :style => "float:right"),  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
+    <% end %>
 	</p>
 	<div class="byline_wrap">
 		<div id="byline<%= statement.id %>" class="byline left">
@@ -48,7 +53,6 @@
 		<% end %>
 			<% if moderate %>
 			<%= link_to "Respond", "/#{statement.by_link}" %>
-			<%= link_to_remote "X",  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
 			<% end %>
 		</div>
 	</div>

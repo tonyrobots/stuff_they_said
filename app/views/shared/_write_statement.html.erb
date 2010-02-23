@@ -1,5 +1,5 @@
 <div id="write_statement">
-<p><%= link_to_remote "<img src='/images/refresh.png' border=0 align='left'>", :url => { :controller => "statements", :action => "change_question", :name => firstName(user_name) }, :method => :post%>
+<p><%= link_to_remote "<img src='/images/icons/refresh.png' border=0 align='left'>", :url => { :controller => "statements", :action => "change_question", :name => firstName(user_name) }, :method => :post%>
 	<b><div id="question"><%=h @question %></div></b>
 </p>
 
@@ -11,6 +11,7 @@
 		<%= f.hidden_field :question, :value => @question %>
 	    <%= f.hidden_field :by_link, :value => current_user.permalink %>
 	    <%= f.text_area :content, :class => "content" %><br class="clear">
+		<div id="fb_confirm">post this to <%= firstName (user_name) %>'s Facebook wall</i><%= f.check_box :fbpost, :checked=> true %></div>
 </td><td>
 
 		<%= f.submit "Say It!" %>

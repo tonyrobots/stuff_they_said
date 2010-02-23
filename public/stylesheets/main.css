@@ -35,7 +35,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_nav li { display: inline; padding: 5px; } 
 		#user_nav form { display: inline;}
 		#user_nav input { border: 1px solid #ccc; padding: 2px; background-color: #ddd}
-		#nav_search { float: right; position: relative; top: 50px; }
+		#nav_search { float: right; color: #333333; position: relative; top: 50px; border: 2px solid #0D4A6F;  -webkit-border-radius: 3px; -moz-border-radius: 3px; }
 	#main_wrap { margin: 0; padding: 10px;}
 	#user_info { margin-right: 20px; width: 200px; float: left;}
 		#user_pic img { border: 6px solid #000; }
@@ -56,16 +56,17 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #c4e2f0; border: 1px solid #689;}
 		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
 		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
+		#write_statement #fb_confirm {float: right; font-style: italic; color: #222; font-size: 11px}
 		#statement_block { }		
 		
 		
 		.read_statement { padding: 10px; width: 680px; margin: 10px; border-bottom: 1px dotted #222;}
 		.read_statement p.question { font-size: 13px; line-height: 1.4em; position: relative; left: 70px; color: #444;}
-		.read_statement p.content { font-size: 18px; background-color: #CCC; padding: 5px; width: 600px; position: relative; left: 70px; }
+		.read_statement p.content { font-size: 18px; background-color: #CCC; padding: 5px; width: 600px; position: relative; left: 70px;  -webkit-border-radius: 3px; -moz-border-radius: 3px; }
 		.read_statement .byline_wrap {float: right; }
-		.read_statement .thumbnail {float:left;}
-		.byline_wrap .byline { font-style: italic; color: #333;}
-		.byline_wrap .actions { margin: 0 5px; position: relative;}
+		.read_statement .thumbnail {float:left; position:relative; top:8px}
+		.byline_wrap .byline { font-style: italic; color: #333; font-size: 14px}
+		.byline_wrap .actions { margin: 0 5px; position: relative;  font-size: 14px}}
 		.actions .score { padding: 0 5px; margin: 0 5px; border: 1px solid gray;}
 			.actions .pos { background: #CFC; }
 			.actions .neg { background: #FE9099; }
