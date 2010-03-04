@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
 def firstName (name)
-  name.scan(/\w+/)[0]
+  name.scan(/\w+-?/)[0]
 end
 
   def publish_to_fb(page, to_user, action, action_link, message, message_link)

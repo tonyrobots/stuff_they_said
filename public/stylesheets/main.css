@@ -53,9 +53,9 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
-		#write_statement { width: 680px; height:auto; margin: 10px 0; padding: 10px; background-color: #c4e2f0; border: 1px solid #689;}
-		#write_statement input.question { width: 600px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
-		#write_statement textarea.content { width: 600px; height: 50px; padding: 3px; font-size: 13px;} 
+		#write_statement { width: 350px; height:auto; margin: 10px; padding: 10px; background-color: #c4e2f0; border: 1px solid #689; float:left}
+		#write_statement input.question { width: 290px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
+		#write_statement textarea.content { width: 290px; height: 70px; padding: 3px; font-size: 13px;} 
 		#write_statement #fb_confirm {float: right; font-style: italic; color: #222; font-size: 11px}
 		#statement_block { }		
 		
@@ -83,7 +83,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#describe_friend img {border: 6px solid #000;}
 		#describe_friend .blurb { padding: 10px; margin-bottom: 10px; font-size: 16px;}
 		#describe_friend .input_box { margin: 20px; float: left; font-weight: bold; }
-		#describe_friend .input_box textarea { min-width: 500px; height: 100px; border: 1px solid #689; background-color: #CFC; font-size: 13px; padding: 7px;}
+		#describe_friend .input_box textarea { min-width: 400px; height: 100px; border: 1px solid #689; background-color: #CFC; font-size: 13px;}
 
 		#notifications { margin: 10px 5px; padding: 10px; background-color: #3984DA; color: #fff; font-size: 16px;}
 		a#notifications {color: #fff}
@@ -118,6 +118,9 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.activity_item .connection { float: left; margin: 10px; }
 		.activity_item .content { float: left; margin: 10px 10px 10px 30px;}
 		.activity_item p.question { font-size: 13px; font-style:italic; color: #444;}
+		
+		/* Ad */
+		#ad_rect { width:300px; margin:5px;}
 		
 		/* Nice forms */
 			#inputArea

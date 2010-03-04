@@ -4,6 +4,11 @@
 	<strong><%= user_notificaion(@notification) unless @notification.nil? %></strong><br class="clear">
 </div>
 
+<div id="ad_rect">
+	<%= render :partial => "shared/rect_ad" %>
+</div>
+	
+
 <div id="describe_friend_wrap">
 	<% if @dtype == 1 %>
 	<%= render :partial => 'shared/describe_friend', :locals => { :fbuid => @random_user } %>

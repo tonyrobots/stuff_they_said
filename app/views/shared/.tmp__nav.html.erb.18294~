@@ -1,0 +1,29 @@
+<ul id="user_nav">
+<% if current_user %>
+<li>
+	<%= link_to current_user.name, user_page_path(current_user.permalink)%>
+</li>
+<li> <%= link_to "Privacy & Settings", "/settings" %> </li>
+<li> <%= fb_logout_link "Sign Out", "/logout", :js => :jquery %> </li>
+<% else %>
+<li><%= link_to "Sign In", "#", :onclick => "FB.Connect.requireSession(function() { connect_to_facebook(); });" %> </li>
+<% end %>
+<li>
+	<form id='search_form' action="javascript:search_form();">
+    <%= text_field_tag :search, params[:search], :value => "Type a friend's name", :onclick => "this.value = '';" %>
+</form>
+
+</li>
+<ul>
+<form id='connect_to_facebook_form' method='post' action='/user_session'>
+	<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'/>
+</form>
+<script type='text/javascript' charset='utf-8'>
+ 	function connect_to_facebook() {
+   		jQuery('#connect_to_facebook_form').submit();
+ 	}
+	function search_form(){
+		if($('#search').val() == "") alert("Please enter a search term");
+		else window.location.href = '/search/'+$('#search').val();
+	}
+</script>

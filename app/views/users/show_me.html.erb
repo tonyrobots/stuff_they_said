@@ -38,6 +38,9 @@
 			<% end %>
 		</div>
 		<% end %>
+		<div id="rect_ad">
+			<%= render :partial => "shared/rect_ad" %>
+		</div>
 		<div id="user_statements">
 			<%= render :partial => "shared/read_statement", :collection => @user.statements, :as => :statement, :locals => { :moderate => true, :vote => true }  %>
 		</div>
