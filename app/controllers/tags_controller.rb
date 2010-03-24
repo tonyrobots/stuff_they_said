@@ -6,14 +6,14 @@ class TagsController < ApplicationController
       @tag = Tag.find_by_name params[:tag]
       friends_and_i = current_user.friends <<  current_user
       @results = friends_and_i.all(:joins => :taggings, :include => :taggings, :conditions => ["taggings.tag_id = ?", @tag.id]).uniq.paginate(:page => params[:page], :per_page => 20)
-      @results.sort! {|x,y| y.taggings.count(:conditions => "taggings.tag_id=5 and taggings.tag_vote=1") <=> 
-        x.taggings.count(:conditions => "taggings.tag_id=5 and taggings.tag_vote=1")
+      @results.sort! {|x,y| y.taggings.count(:conditions => ["taggings.tag_id=? and taggings.tag_vote=?", @tag.id, 1]) <=> 
+        x.taggings.count(:conditions => ["taggings.tag_id=? and taggings.tag_vote=?", @tag.id, 1])
         }    
     else
       @tag = Tag.find_by_name params[:tag]
       @results = User.all(:joins => :taggings, :include => :taggings, :conditions => ["taggings.tag_id = ?", @tag.id]).uniq.paginate(:page => params[:page], :per_page => 20)
-      @results.sort! {|x,y| y.taggings.count(:conditions => "taggings.tag_id=5 and taggings.tag_vote=1") <=> 
-        x.taggings.count(:conditions => "taggings.tag_id=5 and taggings.tag_vote=1")
+      @results.sort! {|x,y| y.taggings.count(:conditions => ["taggings.tag_id=? and taggings.tag_vote=?", @tag.id, 1]) <=> 
+        x.taggings.count(:conditions => ["taggings.tag_id=? and taggings.tag_vote=?", @tag.id, 1])
         }
       render :action => "everyone"
     end

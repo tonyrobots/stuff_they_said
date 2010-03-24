@@ -110,6 +110,7 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		.tag_vote ul { display: inline; margin: 0; padding: 0;}
 		.tag_vote li { display: inline;}
 		.tag_vote a { padding: 0 3px;}
+		.tag_score {float: right; height: 50px; width: 50px; background: #3984DA;  -webkit-border-radius: 8px; -moz-border-radius: 8px; font-size:30px; color: white }
 		
 		/* Activities */
 		.activity_item { padding: 20px 0; border-bottom: 1px solid #eee;}

@@ -10,8 +10,11 @@
  
 	<div id="search_results">
 		<% x = 1 %>
+		<table width="400px">
 		<% for user in @results %>
+		<tr><td>
 		<div id="search_item_<%= user.id %>" class="search_item">
+			
 			<div class="tag_rank">#<%= x%></div>
 			<a href="/<%= user.permalink %>">
 			<%= image_tag user.image_thumb %>
@@ -27,14 +30,20 @@
 				<%= disagree_tags(user.taggings, @tag.id)%>
 				<span>
 					<%= link_to "Agree", vote_tag_path(:tag => params[:tag], :user => user.id, :state => 1)%>
-					<span class="tag_score"><%= tag_score(user.taggings, @tag.id) %></span>
+					
 					<%= link_to "Disagree", vote_tag_path(:tag => params[:tag], :user => user.id, :state => 0)%>
 				</span>
+				</td>
+				<td>
+				<div class="tag_score"> <%= tag_score(user.taggings, @tag.id) %></div>
+
+				</td></tr>
 			</div>
 			<br class="clear">
 		</div>	
 		<% x+=1 %>
 		<% end %>
+		</table>
 		<%= will_paginate @results %>
 		
 	</div>

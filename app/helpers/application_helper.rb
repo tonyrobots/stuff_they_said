@@ -54,7 +54,7 @@ end
       good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && tag.tag_vote && tag != first_tag)
     end
     good_tags
-    "<div class=\"tag_vote\"><ul><li>Agreed by </li>#{good_tags}</ul></div>" if good_tags != ""
+    "<div class=\"tag_vote\"><ul><li>Agree: </li>#{good_tags}</ul></div>" if good_tags != ""
   end
 
   def disagree_tags(user_tags, tag_id)
@@ -63,7 +63,7 @@ end
     for tag in user_tags
       good_tags << "<li>#{link_to tag.voter_name, '/'+tag.voter_link}</li>" if (tag.tag_id == tag_id && !tag.tag_vote && tag != first_tag)
     end
-    "<div class=\"tag_vote\"><ul><li>Disgreed by </li>#{good_tags}</ul></div>" if good_tags != ""
+    "<div class=\"tag_vote\"><ul><li>Disagree: </li>#{good_tags}</ul></div>" if good_tags != ""
   end
 
   def tag_score(user_tags, tag_id)
