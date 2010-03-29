@@ -16,6 +16,22 @@
 	  <%= link_to_remote image_tag("icons/delete.png",:size => "20x20", :style => "float:right"),  :url => { :controller => "statements", :action => "destroy", :id => statement.id }, :method => :delete %>
     <% end %>
 	</p>
+	<div class="vote">
+		<% if vote %>
+		<% user = {:permalink=>current_user.permalink, :name=>current_user.name, :id=> current_user.id} %>
+			<% if(statement.vote_data[:likers].include?(user)) %>
+			<span id="like-<%= statement.id %>" class="voted left"><%= image_tag "icons/liked.png" %></span>
+			<% else %>
+			<span id="like-<%= statement.id %>" class="left"> <%= link_to_remote (image_tag "icons/like.png"),  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post %></span>
+			<% end %>
+			<% if statement.vote_data[:dislikers].include?(user) %>
+			<span id="dislike-<%= statement.id %>" class="voted left"><%= image_tag "icons/disliked.png" %></span>
+			<% else %>
+			<span id="dislike-<%= statement.id %>" class="left"><%= link_to_remote (image_tag "icons/dislike.png"),  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %></span>
+			<% end %>
+	 	<% end %>		
+		
+	</div>
 	<div class="byline_wrap">
 		<div id="byline<%= statement.id %>" class="byline left">
 			by <%= link_to statement.by, "/#{statement.by_link}" %>, <%= time_ago_in_words statement.created_at %> ago
@@ -23,33 +39,28 @@
 		<div class="actions left">
 		<% if vote %>
 		<% user = {:permalink=>current_user.permalink, :name=>current_user.name, :id=> current_user.id} %>
-		
-			<% if(statement.vote_data[:likers].include?(user)) %>
-			<span id="like-<%= statement.id %>" class="voted left">Like</span>
-			<% else %>
-			<span id="like-<%= statement.id %>" class="left"> <%= link_to_remote "Like",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "like" }, :method => :post %></span>
-			<% end %>
+
 			<div id="statement_vote_<%= statement.id %>" class="left score <%= score_class(statement.score) %>">
-			<%= statement.score %>
+				<%= score_to_text (statement.vote_data[:likers].size, statement.vote_data[:dislikers].size, statement.score) %>
+
 				<div id="statement_vote_<%= statement.id %>_score" class="vote_tip rounded-10" display>
 					<div class="likers">
-						<% for liker in statement.vote_data[:likers] %>
-							<%= liker[:name] %><br class="clear">
+						<% if statement.vote_data[:likers].size > 0 %><u>Liked:</u><br />
+							<% for liker in statement.vote_data[:likers] %>
+								<%= liker[:name] %><br class="clear">
+							<% end %>
 						<% end %>
 					</div>
 					<div class="dislikers">
-						<% for liker in statement.vote_data[:dislikers] %>
-							<%= liker[:name] %><br class="clear">
+						<% if statement.vote_data[:dislikers].size > 0 %><u>Disliked:</u><br />
+							<% for disliker in statement.vote_data[:dislikers] %>
+								<%= disliker[:name] %><br class="clear">
+							<% end %>
 						<% end %>
 					</div>
+					<% if statement.vote_data[:likers].size + statement.vote_data[:dislikers].size == 0 %>Be the first to vote!<% end %>
 				</div>
 			</div>
-			<% if statement.vote_data[:dislikers].include?(user) %>
-
-			<span id="dislike-<%= statement.id %>" class="voted left">Dislike</span>
-			<% else %>
-			<span id="dislike-<%= statement.id %>" class="left"><%= link_to_remote "Dislike",  :url => { :controller => "statements", :action => "vote", :id => statement.id , :type => "dislike" }, :method => :post %></span>
-			<% end %>
 		<% end %>
 			<% if moderate %>
 			<%= link_to "Respond", "/#{statement.by_link}" %>
@@ -57,5 +68,6 @@
 		</div>
 	</div>
 	</div>
+	
 	<br class="clear">
 </div>

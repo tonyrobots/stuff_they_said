@@ -83,15 +83,16 @@ class StatementsController < ApplicationController
       pos_score = statement.votes_for
       neg_score = statement.votes_against
       score = pos_score - neg_score
+      
       statement.update_attribute(:score, score)
       render :update do |page|
-        page.replace_html "statement_vote_#{params[:id]}", score
-        page.replace_html "#{params[:type]}-#{params[:id]}", "#{params[:type]}"
+        page.replace_html "statement_vote_#{params[:id]}", score_to_text(pos_score, neg_score, score)
+        page.replace_html "#{params[:type]}-#{params[:id]}", image_tag("icons/#{params[:type]}d.png")
         page["#{params[:type]}-#{params[:id]}"].addClass('voted');
       end
     rescue ActiveRecord::StatementInvalid
       render :update do |page|
-        page << "alert('Already voted!');"
+        page << "alert('Sorry, but you can only vote once!');"
       end
     rescue
     end

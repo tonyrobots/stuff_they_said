@@ -38,6 +38,10 @@ end
     end
   end
   
+  def score_to_text(likers, dislikers, score)
+     pluralize(likers, 'liker') + ", " + pluralize(dislikers, 'disliker') + " for a vote score of <strong>" + score.to_s + "</strong>"
+  end
+  
   def first_tag(user_tags, tag_id)
     good_tag = ""
     taggs = []
