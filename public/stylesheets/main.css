@@ -53,9 +53,9 @@ h1 {font-size: 30px; font-weight: normal; color: #111; font-family: "Arial Round
 		#user_whois .byline { font-style: italic; float: right; margin: 10px 5px;}
 		.whois_item { border-bottom: 1px dotted #333;}
 		
-		#write_statement { width: 350px; height:auto; margin: 10px; padding: 10px; background-color: #c4e2f0; border: 1px solid #689; float:left}
-		#write_statement input.question { width: 290px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
-		#write_statement textarea.content { width: 290px; height: 70px; padding: 3px; font-size: 13px;} 
+		#write_statement { width: 600px; height:auto; margin: 10px; padding: 10px; background-color: #c4e2f0; border: 1px solid #689; float:left}
+		#write_statement input.question { width: 500px; padding: 3px; border: 1px solid #689; line-height: 1.6em; font-size: 16px;} 
+		#write_statement textarea.content { width: 500px; height: 70px; padding: 3px; font-size: 13px;} 
 		#write_statement #fb_confirm {float: right; font-style: italic; color: #222; font-size: 11px}
 		#statement_block { }		
 		
